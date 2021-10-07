@@ -5,15 +5,16 @@ require_once('./components/top.php');
 
 <div class="signup__container">
 
-  <div class="signup__wrapper">
-    <img class="signup__logo" src="" alt="">
+  <img class="signup__logo logo" src="./assets/logo1.svg" alt="logo">
 
+  <div class="signup__wrapper">
     <form onsubmit="return false" class="form signup__form">
-      <div>
+      <h1 class="signup__form__title" >Create account</h1>
+      <legend>
         <label for="user_name">Your name</label>
         <small>e.g John Doe</small>
         <input id="user_name" class="user_name" name="user_name" type="text" placeholder=" ">
-      </div>
+      </legend>
       <legend>
         <label for="user_email">Email</label>
         <small>e.g john@doe.com</small>
@@ -24,11 +25,20 @@ require_once('./components/top.php');
         <small>At least 8 characters</small>
         <input id="user_password" class="user_password" name="user_password" type="password" placeholder=" ">
       </legend>
+      <legend>
+        <label for="re-enter_user_password">Re-enter password</label>
+        <small>Must match password above</small>
+        <input id="re-enter_user_password" class="re-enter_user_password" name="re-enter_user_password" type="password" placeholder=" ">
+      </legend>
       <legend class="signup__form__btn__container">
         <button class="signup__button" onclick="signup()">Create your Amasoon account</button>
       </legend>
+      <div class="divider"></div>
+      <p>Already have an account? <a href="login"> Sign in </a></p>
     </form>
+
   </div>
+
 </div>
 
 <script>

@@ -35,7 +35,6 @@ try {
   $user_id = $db->lastinsertid();
   if (!$user_id) _res(400, ['info' => 'wrong credentials', 'error' => __LINE__]);
 
-
   // Success
   session_start();
   $_SESSION['user_name'] = $_POST['user_name'];
