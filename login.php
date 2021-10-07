@@ -1,38 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$_documentTitle = 'sign in';
+require_once('./components/top.php');
+?>
+<div class="auth__container">
+  <img class="logo" src="./assets/logo1.svg" alt="logo">
+  <div class="auth__wrapper">
+    <form onsubmit="return false" class="auth__form">
+      <h1 class="auth__form__title">Sign-in</h1>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+      <legend>
+        <label for="user_email">Email</label>
+        <small>e.g John@doe.com</small>
+        <input id="user_email" class="user_email" name="user_email" type="text" placeholder=" ">
+      </legend>
+      <legend>
+        <label for="user_password">Password</label>
+        <small>At least 8 characters</small>
+        <input id="user_password" class="user_password" name="user_password" type="password" placeholder=" ">
+      </legend>
+      <legend class="form__btn__container">
+        <button class="auth__button signup__button " onclick="login()">Continue</button>
+      </legend>
 
-<body>
+      <small class="new__to__amasoon">New to Amasson?</small>
+      <button class=" auth__button login__button"> <a href="signup">Create your Amasoon account </a></button>
+    </form>
 
-  <form onsubmit="return false">
-    <input name="user_email" type="text" placeholder="email">
-    <input name="user_password" type="password" placeholder="password">
-    <button onclick="login()">Login</button>
-  </form>
+  </div>
 
-  <script>
-    async function login() {
-      const form = event.target.form
-      console.log(form)
-      let conn = await fetch("api-login", {
-        method: "POST",
-        body: new FormData(form)
-      })
+</div>
 
-      let res = await conn.json();
-      console.log(res);
-      if (conn.ok) {
-        location.href = "user"
-      }
+<script>
+  async function login() {
+    const form = event.target.form
+    console.log(form)
+    let conn = await fetch("api-login", {
+      method: "POST",
+      body: new FormData(form)
+    })
+
+    let res = await conn.json();
+    console.log(res);
+    if (conn.ok) {
+      location.href = "user"
     }
-  </script>
+  }
+</script>
 
-</body>
-
-</html>
+<?php
+require_once('./components/bottom.php');
+?>

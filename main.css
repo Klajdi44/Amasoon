@@ -15,8 +15,6 @@
   --border-radius: 5px;
 }
 
-/* signup */
-
 label,
 small {
   display: block;
@@ -28,54 +26,57 @@ label {
 small {
   color: var(--gray);
 }
+/******* signup *******/
 
-.signup__container {
+.auth__container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   padding: 0 0.5em;
 }
-.signup__wrapper {
+.auth__wrapper {
   border: 1px solid #dddddd;
   width: clamp(300px, 100%, 450px);
   border-radius: 5px;
 }
-.signup__form {
+.auth__form {
   padding: 1.5em 2em;
 }
-.signup__form__title {
+.auth__form__title {
   font-weight: 400;
 }
 
-.signup__form input {
+.auth__form input {
   width: 100%;
   min-height: 40px;
   text-indent: 5px;
   border: 1px solid #a6a6a6;
   border-radius: var(--border-radius);
 }
-.signup__form small {
+.auth__form small {
   margin-bottom: 5px;
 }
-.signup__form input:focus {
+.auth__form input:focus {
   border: 1px solid var(--border-color);
   outline: 3px solid var(--accent);
 }
-.signup__form > * + * {
+.auth__form > * + * {
   margin-top: 1em;
 }
-.signup__form__btn__container {
+.form__btn__container {
   text-align: center;
 }
-.signup__button {
-  background: var(--gradient);
-  border: 1px solid var(--border-color);
+.auth__button {
   width: 100%;
   padding: 10px 0;
   margin-bottom: 1em;
   cursor: pointer;
   border-radius: var(--border-radius);
+}
+.signup__button {
+  background: var(--gradient);
+  border: 1px solid var(--border-color);
 }
 .signup__button:hover {
   background: var(--accent);
@@ -98,4 +99,44 @@ small {
   width: 50%;
   text-align: center;
   margin: 1em auto;
+}
+/****** Login ******/
+.login__button {
+  background: linear-gradient(to bottom, #f7f8fa, #e7e9ec);
+  border: 1px solid;
+  border-color: #adb1b8 #a2a6ac #8d9096;
+}
+
+.login__button:hover {
+  background: linear-gradient(to bottom, #e7eaf0, #d9dce1);
+}
+
+.new__to__amasoon {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+  margin-top: 3em;
+}
+.new__to__amasoon::before {
+  content: "";
+  width: 30%;
+  height: 1px;
+  background: var(--gray);
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(-60%, 50%);
+  z-index: 1;
+}
+.new__to__amasoon::after {
+  content: "";
+  width: 30%;
+  height: 1px;
+  background: var(--gray);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(60%, -50%);
+  z-index: 1;
 }
