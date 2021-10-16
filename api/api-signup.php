@@ -1,6 +1,6 @@
 <?php
 
-require_once('globals.php');
+require_once(__DIR__ . '/../globals.php');
 
 // Validate
 
@@ -26,11 +26,12 @@ try {
 }
 
 try {
+  $password_hash = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
   $query = $db->prepare('INSERT INTO users VALUES(:user_id,:user_name,:user_email, :user_password)');
   $query->bindValue(':user_id', null);
   $query->bindValue(':user_name', $_POST['user_name']);
   $query->bindValue(':user_email', $_POST['user_email']);
-  $query->bindValue(':user_password', $_POST['user_password']);
+  $query->bindValue(':user_password', $password_hash);
   $query->execute();
 
   $user_id = $db->lastinsertid();

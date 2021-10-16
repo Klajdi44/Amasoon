@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+  header('Location: user');
+}
+
 $_documentTitle = 'Amasoon Registration';
 require_once('./components/top.php');
 ?>
@@ -41,17 +46,21 @@ require_once('./components/top.php');
 <script>
   async function signup() {
     const form = event.target.form
+    try {
+      const request = await fetch("api/api-signup", {
+        method: "POST",
+        body: new FormData(form)
+      })
 
-    const request = await fetch("api-signup", {
-      method: "POST",
-      body: new FormData(form)
-    })
-
-    const response = await request.json();
-    console.log(response);
-    if (request.ok) {
-      location.href = "user"
+      const response = await request.json();
+      console.log(response);
+      if (request.ok) {
+        location.href = "user"
+      }
+    } catch (error) {
+      console.error(error.message);
     }
+
   }
 </script>
 

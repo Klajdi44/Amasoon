@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+  header('Location: user');
+}
+
 $_documentTitle = 'sign in';
 require_once('./components/top.php');
 ?>
@@ -33,17 +38,21 @@ require_once('./components/top.php');
 <script>
   async function login() {
     const form = event.target.form
-    console.log(form)
-    let conn = await fetch("api-login", {
-      method: "POST",
-      body: new FormData(form)
-    })
+    try {
+      let conn = await fetch("api/api-login", {
+        method: "POST",
+        body: new FormData(form)
+      })
 
-    let res = await conn.json();
-    console.log(res);
-    if (conn.ok) {
-      location.href = "user"
+      let res = await conn.json();
+      console.log(res);
+      if (conn.ok) {
+        location.href = "user"
+      }
+    } catch (error) {
+      console.error(error.message);
     }
+
   }
 </script>
 

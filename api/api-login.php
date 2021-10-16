@@ -1,6 +1,5 @@
 <?php
-
-require_once('globals.php');
+require_once(__DIR__ . '/../globals.php');
 
 // Validate
 if (!isset($_POST['user_email'])) _res(400, ['info' => 'email required', 'error' => __LINE__]);
@@ -8,7 +7,7 @@ if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) _res(400, ['info' 
 
 
 // Validate the password
-if (!isset($_POST['user_password'])) _res(400, ['info' => 'password required']);
+if (!isset($_POST['user_password'])) _res(400, ['info' => 'Password required']);
 if (strlen($_POST['user_password']) < _PASSWORD_MIN_LEN) _res(400, ['info' => 'Password must be at least ' . _PASSWORD_MIN_LEN . ' characters long', 'error' => __LINE__]);
 if (strlen($_POST['user_password']) > _PASSWORD_MAX_LEN) _res(400, ['info' => 'Password cannot be more than' . _PASSWORD_MAX_LEN . ' characters long', 'error' => __LINE__]);
 
