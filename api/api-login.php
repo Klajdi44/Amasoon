@@ -17,16 +17,21 @@ try {
   _res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);
 }
 
-
+// check if email exists
 try {
-  $query = $db->prepare('SELECT * FROM users WHERE user_email = :user_email AND user_password = :user_password');
+  $query = $db->prepare('SELECT * FROM users WHERE user_email = :user_email');
   $query->bindValue(':user_email', $_POST['user_email']);
-  $query->bindValue(':user_password', $_POST['user_password']);
   $query->execute();
   $row = $query->fetch();
 
-  // var_export(json_encode($row));
-  if (!$row) _res(400, ['info' => 'wrong credentials', 'error' => __LINE__]);
+  if (!$row) {
+    _res(400, ['info' => 'Email does not exist', 'error' => __LINE__]);
+  }
+
+  //verify password
+  if (!password_verify($_POST['user_password'], $row['user_password'])) {
+    _res(400, ['info' => "Wrong password"]);
+  }
 
   // Success
   session_start();

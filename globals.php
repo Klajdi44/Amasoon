@@ -5,12 +5,12 @@ define('_PASSWORD_MIN_LEN', 8);
 define('_PASSWORD_MAX_LEN', 20);
 
 
-function _res($status = 200, $message = [])
+function _res($status = 200, $message = [], $exit = true)
 {
   http_response_code($status);
   header('Content-Type: application/json');
   echo json_encode($message);
-  exit();
+  if ($exit) exit();
 }
 
 
