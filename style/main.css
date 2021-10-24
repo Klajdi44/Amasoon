@@ -28,9 +28,14 @@ small {
 }
 /******* signup *******/
 .auth__form__error {
-  background: rgb(194, 29, 29);
+  background: rgb(194 29 29 / 73%);
   text-transform: capitalize;
   padding: 0.5em 0.3em;
+  color: #fff;
+  border-radius: var(--border-radius);
+}
+.auth__form__error:empty {
+  display: none;
 }
 .auth__container {
   display: flex;

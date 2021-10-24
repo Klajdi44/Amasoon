@@ -28,7 +28,8 @@ require_once('./components/top.php');
       </legend>
 
       <small class="new__to__amasoon">New to Amasson?</small>
-      <button class=" auth__button login__button"> <a href="signup">Create your Amasoon account </a></button>
+
+      <a href="signup"><input type="button" class=" auth__button login__button" value="Create your Amasoon account" /> </a>
     </form>
 
   </div>
