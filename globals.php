@@ -17,8 +17,8 @@ function _res($status = 200, $message = [], $exit = true)
 function _db()
 {
   $database_user_name = 'root';
-  $database_password = '';
-  $database_connection = 'mysql:host=localhost; dbname=zillow; charset=utf8mb4';
+  $database_password = 'root';
+  $database_connection = 'mysql:host=localhost; dbname=amasoon; charset=utf8mb4';
 
   $database_options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
