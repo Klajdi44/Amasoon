@@ -1,9 +1,8 @@
 <?php
 include_once('./components/top.php');
+include_once('./components/nav.php');
 
 ?>
-
-<h1>hello</h1>
 
 
 <?php include_once('./components/bottom.php'); ?>

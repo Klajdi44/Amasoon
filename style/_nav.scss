@@ -1,0 +1,24 @@
+.nav {
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+  background-color: var(--color-primary);
+  align-items: center;
+  min-height: 40px;
+  padding: 5px 15px;
+  color: #fff;
+
+  &__logo {
+    width: 130px;
+  }
+  &__search__container {
+    display: flex;
+  }
+  &__search {
+    width: clamp(100px, 50vw, 600px);
+  }
+
+  &__login {
+    color: var(--color-white);
+  }
+}

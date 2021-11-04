@@ -17,3 +17,13 @@ label {
 small {
   color: var(--gray);
 }
+
+a {
+  text-decoration: none;
+  color: var(--color-anchor);
+}
+
+.hidden,
+.none {
+  display: none;
+}

@@ -37,7 +37,7 @@
 
     &:focus {
       border: 1px solid var(--border-color);
-      outline: 3px solid var(--accent);
+      outline: 3px solid var(--color--accent);
     }
   }
   small {
@@ -63,7 +63,7 @@
   border: 1px solid var(--border-color);
 
   &:hover {
-    background: var(--accent);
+    background: var(--color-accent);
   }
 }
 
