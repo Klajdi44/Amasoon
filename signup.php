@@ -13,6 +13,7 @@ require_once('./components/top.php');
   <div class="signup__wrapper auth__wrapper">
     <form onsubmit="return false" class="auth__form signup__form">
       <h1 class="auth__form__title">Create account</h1>
+      <p class="auth__form__error"></p>
       <legend>
         <label for="user_name">Your name</label>
         <small>e.g John Doe</small>
@@ -54,6 +55,7 @@ require_once('./components/top.php');
 
       const response = await request.json();
       console.log(response);
+      document.querySelector('.auth__form__error').textContent = response?.info;
       if (request.ok) {
         location.href = "user"
       }

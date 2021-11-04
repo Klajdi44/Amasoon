@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/../globals.php');
 
 // Validate
-if (!isset($_POST['user_email'])) _res(400, ['info' => 'email required', 'error' => __LINE__]);
+if (!isset($_POST['user_email']) || strlen($_POST['user_email']) <= 0) _res(400, ['info' => 'email required', 'error' => __LINE__]);
 if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) _res(400, ['info' => 'Email is invalid', 'error' => __LINE__]);
 
 
