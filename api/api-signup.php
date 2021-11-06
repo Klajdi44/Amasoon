@@ -3,7 +3,6 @@
 require_once(__DIR__ . '/../globals.php');
 
 // Validate
-
 if (!isset($_POST['user_name'])) _res(400, ['info' => 'Name required', 'error' => __LINE__]);
 if (strlen($_POST['user_name']) < _USERNAME_MIN_LEN) _res(400, ['info' => 'Name must be at least ' . _USERNAME_MIN_LEN . ' characters long', 'error' => __LINE__]);
 if (strlen($_POST['user_name']) > _USERNAME_MAX_LEN) _res(400, ['info' => 'Name cannot be more than' . _USERNAME_MAX_LEN . ' characters long', 'error' => __LINE__]);
@@ -21,6 +20,15 @@ if ($_POST['user_password'] != $_POST['re-enter_user_password']) _res(400, ['inf
 
 $db = _db();
 try {
+  $query = $db->prepare('SELECT * FROM users WHERE user_email = :user_email');
+  $query->bindValue('user_email', $_POST['user_email']);
+  $query->execute();
+  $row = $query->fetch();
+
+  if ($row) {
+    _res(400, ['info' => 'Email already exists', 'error' => __LINE__]);
+  }
+
   $password_hash = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
   $verification_key = bin2hex(random_bytes(16));
 
@@ -30,11 +38,11 @@ try {
   $query->bindValue(':user_email', $_POST['user_email']);
   $query->bindValue(':user_password', $password_hash);
   $query->bindValue(':user_verification_key', $verification_key);
-
   $query->execute();
 
+  //TODO:change the info message below
   $user_id = $db->lastinsertid();
-  if (!$user_id) _res(400, ['info' => 'wrong credentials', 'error' => __LINE__]);
+  if (!$user_id) _res(400, ['info' => 'Wrong credentials', 'error' => __LINE__]);
 
   // Success
   session_start();
