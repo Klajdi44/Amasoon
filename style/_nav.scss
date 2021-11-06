@@ -13,9 +13,35 @@
   }
   &__search__container {
     display: flex;
+
+    &:focus-within > * {
+      outline: 2px solid var(--color-accent);
+    }
   }
   &__search {
     width: clamp(100px, 50vw, 600px);
+    height: 38px;
+    font-size: 18px;
+    border: 0;
+    text-indent: 8px;
+    outline: none;
+    &::-webkit-search-cancel-button {
+      margin: 0 10px 0 10px;
+      cursor: pointer;
+    }
+  }
+
+  &__search__button {
+    background: var(--color-accent);
+    border: none;
+    padding: 0 16px;
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    cursor: pointer;
+
+    i {
+      font-size: 20px;
+    }
   }
 
   &__login {
