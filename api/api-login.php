@@ -11,11 +11,7 @@ if (!isset($_POST['user_password'])) _res(400, ['info' => 'Password required']);
 if (strlen($_POST['user_password']) < _PASSWORD_MIN_LEN) _res(400, ['info' => 'Password must be at least ' . _PASSWORD_MIN_LEN . ' characters long', 'error' => __LINE__]);
 if (strlen($_POST['user_password']) > _PASSWORD_MAX_LEN) _res(400, ['info' => 'Password cannot be more than' . _PASSWORD_MAX_LEN . ' characters long', 'error' => __LINE__]);
 
-try {
-  $db = _db();
-} catch (Exception $ex) {
-  _res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);
-}
+$db = _db();
 
 // check if email exists
 try {

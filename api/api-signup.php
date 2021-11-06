@@ -19,20 +19,18 @@ if (strlen($_POST['user_password']) < _PASSWORD_MIN_LEN) _res(400, ['info' => 'P
 if (strlen($_POST['user_password']) > _PASSWORD_MAX_LEN) _res(400, ['info' => 'Password cannot be more than' . _PASSWORD_MAX_LEN . ' characters long', 'error' => __LINE__]);
 if ($_POST['user_password'] != $_POST['re-enter_user_password']) _res(400, ['info' => 'Passwords do not match', 'error' => __LINE__]);
 
-try {
-  $db = _db();
-} catch (Exception $ex) {
-  _res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);
-}
-
+$db = _db();
 try {
   $password_hash = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
+  $verification_key = bin2hex(random_bytes(16));
 
-  $query = $db->prepare('INSERT INTO users VALUES(:user_id,:user_name,:user_email, :user_password)');
+  $query = $db->prepare('INSERT INTO users(user_id,user_name,user_email,user_password,user_verification_key) VALUES(:user_id,:user_name,:user_email, :user_password,:user_verification_key)');
   $query->bindValue(':user_id', null);
   $query->bindValue(':user_name', $_POST['user_name']);
   $query->bindValue(':user_email', $_POST['user_email']);
   $query->bindValue(':user_password', $password_hash);
+  $query->bindValue(':user_verification_key', $verification_key);
+
   $query->execute();
 
   $user_id = $db->lastinsertid();
