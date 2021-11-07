@@ -1,5 +1,4 @@
 <?php
-//TODO: Verify the key (must be 32 characters); 
 if (!isset($_GET['key'])) {
 	// (the key is missing so the user is trying to do something suspicious)
 	echo "Suspicious...";

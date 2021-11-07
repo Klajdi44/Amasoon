@@ -44,11 +44,10 @@ try {
   if (!$user_id) _res(400, ['info' => 'Wrong credentials', 'error' => __LINE__]);
 
   // Success
-  $email = 'klajdiphp@gmail.com';
   $_to_email = "klajdiphp@gmail.com";
   $_name = $_POST['user_name'];
-  $subject = "Email verification";
-  $_message = "Thank you for signing up!,
+  $_subject = "Email verification";
+  $_message = "Thank you for signing up $_name!,
    <a href='http://localhost:8080/amasoon/verify-email.php?key=$verification_key'> click here to verify your account </a>";
   require_once(__DIR__ . '/../private/send_email.php');
 
