@@ -5,7 +5,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $_documentTitle = 'sign in';
-require_once('./components/top.php');
+require_once(__DIR__ . '/components/top.php');
 ?>
 <div class="auth__container">
   <img class="logo" src="./assets/logo1.svg" alt="logo">
@@ -49,7 +49,7 @@ require_once('./components/top.php');
       console.log(res);
       document.querySelector('.auth__form__error').textContent = res?.info;
       if (conn.ok) {
-        location.href = "user"
+        location.href = "index"
       }
     } catch (error) {
       console.error(error.message);
@@ -59,5 +59,5 @@ require_once('./components/top.php');
 </script>
 
 <?php
-require_once('./components/bottom.php');
+require_once(__DIR__ . '/components/bottom.php');
 ?>
