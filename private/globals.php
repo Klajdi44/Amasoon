@@ -13,6 +13,12 @@ function _res($status = 200, $message = [], $exit = true)
   if ($exit) exit();
 }
 
+function _is_user_signed_in()
+{
+  session_start();
+  return $_SESSION['user_id'];
+}
+
 
 function _db()
 {

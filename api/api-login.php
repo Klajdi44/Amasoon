@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../globals.php');
+require_once(__DIR__ . '/../private/globals.php');
 
 // Validate
 if (!isset($_POST['user_email']) || strlen($_POST['user_email']) <= 0) _res(400, ['info' => 'email required', 'error' => __LINE__]);

@@ -5,7 +5,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $_documentTitle = 'Amasoon Registration';
-require_once('./components/top.php');
+require_once(__DIR__ . '/components/top.php');
 ?>
 
 <div class="signup__container auth__container">
@@ -57,7 +57,7 @@ require_once('./components/top.php');
       console.log(response);
       document.querySelector('.auth__form__error').textContent = response?.info;
       if (request.ok) {
-        location.href = "user"
+        location.href = "index"
       }
     } catch (error) {
       console.error(error.message);
@@ -67,5 +67,5 @@ require_once('./components/top.php');
 </script>
 
 <?php
-require_once('./components/top.php');
+require_once(__DIR__ . '/components/bottom.php');
 ?>
