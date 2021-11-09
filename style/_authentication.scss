@@ -97,6 +97,19 @@
     background: linear-gradient(to bottom, #e7eaf0, #d9dce1);
   }
 }
+.auth__need__help {
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--color-anchor);
+  &::marker {
+    color: #000;
+  }
+}
+
+.auth__forgot__password {
+  padding-left: 17px;
+  font-size: 16px;
+}
 
 .new__to__amasoon {
   position: relative;

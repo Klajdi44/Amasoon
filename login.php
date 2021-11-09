@@ -27,6 +27,11 @@ require_once(__DIR__ . '/components/top.php');
         <button class="auth__button signup__button " onclick="login()">Continue</button>
       </legend>
 
+      <details>
+        <summary class="auth__need__help">Need help? </summary>
+        <a class="auth__forgot__password" href="#.">Forgot password</a>
+      </details>
+
       <small class="new__to__amasoon">New to Amasson?</small>
 
       <a href="signup"><input type="button" class=" auth__button login__button" value="Create your Amasoon account" /> </a>

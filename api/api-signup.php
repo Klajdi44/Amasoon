@@ -30,13 +30,15 @@ try {
 
   $password_hash = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
   $verification_key = bin2hex(random_bytes(16));
+  $forgot_password_key = bin2hex(random_bytes(16));
 
-  $query = $db->prepare('INSERT INTO users(user_id,user_name,user_email,user_password,user_verification_key) VALUES(:user_id,:user_name,:user_email, :user_password,:user_verification_key)');
+  $query = $db->prepare('INSERT INTO users(user_id,user_name,user_email,user_password,user_verification_key,forgot_password_key) VALUES(:user_id,:user_name,:user_email, :user_password,:user_verification_key,:forgot_password_key)');
   $query->bindValue(':user_id', null);
   $query->bindValue(':user_name', $_POST['user_name']);
   $query->bindValue(':user_email', $_POST['user_email']);
   $query->bindValue(':user_password', $password_hash);
   $query->bindValue(':user_verification_key', $verification_key);
+  $query->bindValue(':forgot_password_key', $forgot_password_key);
   $query->execute();
 
   //TODO:change the info message below
