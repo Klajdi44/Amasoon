@@ -7,7 +7,7 @@ if (strlen($_POST['user_name']) < _USERNAME_MIN_LEN) _res(400, ['info' => 'Name 
 if (strlen($_POST['user_name']) > _USERNAME_MAX_LEN) _res(400, ['info' => 'Name cannot be more than' . _USERNAME_MAX_LEN . ' characters long', 'error' => __LINE__]);
 
 //validate email
-if (!isset($_POST['user_email']) || (strlen($_POST['user_email']) <= 0)) _res(400, ['info' => 'email required', 'error' => __LINE__]);
+if (!isset($_POST['user_email'])) _res(400, ['info' => 'email required', 'error' => __LINE__]);
 if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) _res(400, ['info' => 'Email is invalid', 'error' => __LINE__]);
 
 
