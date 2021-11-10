@@ -24,7 +24,7 @@ require_once(__DIR__ . '/components/top.php');
         <input id="user_password" class="user_password" name="user_password" type="password" placeholder=" ">
       </legend>
       <legend class="form__btn__container">
-        <button class="auth__button signup__button " onclick="login()">Continue</button>
+        <button class="auth__button  primary__btn" onclick="login()">Continue</button>
       </legend>
 
       <details>

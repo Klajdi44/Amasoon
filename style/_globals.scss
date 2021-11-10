@@ -22,6 +22,17 @@ a {
   text-decoration: none;
   color: var(--color-anchor);
 }
+p {
+  line-height: 160%;
+  color: rgb(85, 80, 80);
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .hidden,
 .none {
