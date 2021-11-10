@@ -9,7 +9,7 @@ require_once(__DIR__ . '/components/top.php');
 ?>
 
 <div class="signup__container auth__container">
-  <img class="logo" src="./assets/logo1.svg" alt="logo">
+  <?php require_once(__DIR__ . '/components/logo.php') ?>
   <div class="signup__wrapper auth__wrapper">
     <form onsubmit="return false" class="auth__form signup__form">
       <h1 class="auth__form__title">Create account</h1>
