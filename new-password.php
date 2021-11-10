@@ -2,45 +2,61 @@
 require_once(__DIR__ . '/components/top.php');
 ?>
 
-<form onsubmit="return false">
-	<legend>
-		<label for="user_password">Password</label>
-		<small>At least 8 characters</small>
-		<input id="user_password" class="user_password" name="user_password" type="password" placeholder=" ">
-	</legend>
+<section class="new__password__container">
+	<?php require_once(__DIR__ . '/components/logo.php') ?>
 
-	<legend>
-		<label for="re-enter_user_password">Re-enter password</label>
-		<small>Must match password above</small>
-		<input id="re-enter_user_password" class="re-enter_user_password" name="re-enter_user_password" type="password" placeholder=" ">
-	</legend>
+	<p class="new__password__info"></p>
 
-	<button onclick="createNewPassword()">Create</button>
-</form>
+	<article class="new__password ">
+		<h1 class="new__password__title"> Create a new password! </h1>
+		<form onsubmit="return false">
+			<legend>
+				<label for="user_password">Password</label>
+				<small>At least 8 characters</small>
+				<input id="user_password" class="user_password" name="user_password" type="password" placeholder=" ">
+			</legend>
+
+			<legend>
+				<label for="re-enter_user_password">Confirm password</label>
+				<small>Must match password above</small>
+				<input id="confirm_user_password" class="re-enter_user_password" name="re-enter_user_password" type="password" placeholder=" ">
+			</legend>
+
+			<button class="new__password__btn primary__btn" onclick="createNewPassword()">Create</button>
+		</form>
+	</article>
+</section>
+
 
 <script>
 	async function createNewPassword() {
+		const infoElement = document.querySelector('.new__password__info');
+
 		const urlParams = new URLSearchParams(window.location.search);
+
 		const key = urlParams.has('key') ? urlParams.get('key') : null;
 		const formData = new FormData(event.target.form)
 		formData.append('key', key);
 
 		if (!key || key?.length != 32) {
-			return console.log('suspicious');
+			return infoElement.textContent = "Suspicious"
 		}
 
 		try {
-			let conn = await fetch("api/api_new_password", {
+			let request = await fetch("api/api_new_password", {
 				method: "POST",
 				body: formData
 			})
 
-			let res = await conn.json();
-			console.log(res);
+			let response = await request.json();
+			console.log(response);
 
-			// if (conn.ok) {
-			// 	location.href = "index"
-			// }
+			infoElement.textContent = response?.info;
+
+
+			if (request.ok) {
+				infoElement.classList.add('success');
+			}
 		} catch (error) {
 			console.error(error.message);
 		}

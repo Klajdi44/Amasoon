@@ -30,7 +30,7 @@ require_once(__DIR__ . '/components/top.php');
         <input id="user_password" class="user_password" name="user_password" type="password" placeholder=" ">
       </legend>
       <legend>
-        <label for="re-enter_user_password">Re-enter password</label>
+        <label for="re-enter_user_password">Confirm password</label>
         <small>Must match password above</small>
         <input id="re-enter_user_password" class="re-enter_user_password" name="re-enter_user_password" type="password" placeholder=" ">
       </legend>
