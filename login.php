@@ -29,7 +29,7 @@ require_once(__DIR__ . '/components/top.php');
 
       <details>
         <summary class="auth__need__help">Need help? </summary>
-        <a class="auth__forgot__password" href="#.">Forgot password</a>
+        <a class="auth__forgot__password" href="forgot-password">Forgot password</a>
       </details>
 
       <small class="new__to__amasoon">New to Amasson?</small>

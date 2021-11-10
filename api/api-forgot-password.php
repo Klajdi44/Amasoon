@@ -25,8 +25,10 @@ try {
 	$_name = $row['user_name'];
 	$_subject = "Password recovery";
 	$_message = "Hello $_name, you forgot your password,
-   <a href='http://localhost:8080/amasoon/verify-email.php?key=$forgot_password_key'> click here to create a new one!</a>";
+   <a href='http://localhost:8080/amasoon/new-password.php?key=$forgot_password_key'> click here to create a new one!</a>";
 	require_once(__DIR__ . '/../private/send_email.php');
+
+	_res(200, ['info' => 'Email sent successfully']);
 } catch (Exception $ex) {
 	_res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);
 }

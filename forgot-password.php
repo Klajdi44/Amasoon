@@ -21,7 +21,7 @@ include_once(__DIR__ . '/components/top.php');
 			});
 
 			const response = await request.
-			text();
+			json();
 			console.log(response);
 
 		} catch (error) {
