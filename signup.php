@@ -48,7 +48,6 @@ require_once(__DIR__ . '/components/top.php');
 
 <script>
   async function signup() {
-    let loading = true;
     const loader = document.querySelector('.loader ');
     loader.classList.remove("hidden");
     const form = event.target.form

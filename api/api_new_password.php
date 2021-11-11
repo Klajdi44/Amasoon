@@ -22,10 +22,8 @@ if ($_POST['user_password'] != $_POST['confirm_user_password']) _res(400, ['info
 
 $db = _db();
 
+
 try {
-
-	$db->beginTransaction();
-
 	//check if forgot  password key exists in db
 	$query = $db->prepare('SELECT forgot_password_key from users where forgot_password_key = :forgot_password_key');
 	$query->bindValue(':forgot_password_key', $_POST['key']);
@@ -34,41 +32,30 @@ try {
 
 	if (!$row) {
 		_res(400, ['info' => 'Password key not found or expired', 'error' => __LINE__]);
-		$db->rollBack();
 	}
+} catch (Exception $ex) {
+	_res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);
+}
 
 
+try {
 	$hashed_password = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
+	$forgot_password_key = bin2hex(random_bytes(16));
 
-	//update user password with new one
-	$query = $db->prepare('UPDATE users set user_password = :user_password where forgot_password_key = :forgot_password_key');
+	//update user password,forgo password key
+	$query = $db->prepare('UPDATE users set user_password = :user_password, forgot_password_key = :new_forgot_password_key where forgot_password_key = :forgot_password_key');
 	$query->bindValue(':user_password', $hashed_password);
 	$query->bindValue(':forgot_password_key', $_POST['key']);
-	$query->execute();
-	$row = $query->rowCount();
-
-	if (!$row) {
-		_res(500, ['info' => 'Failed to create new password, please try again', 'error' => __LINE__]);
-		$db->rollBack();
-	}
-
-	//generate new forgot_password_key
-	$forgot_password_key = bin2hex(random_bytes(16));
-	$query = $db->prepare('UPDATE users set forgot_password_key = :new_forgot_password_key where forgot_password_key = :old_forgot_password_key');
 	$query->bindValue(':new_forgot_password_key', $forgot_password_key);
-	$query->bindValue(':old_forgot_password_key', $_POST['key']);
 	$query->execute();
 	$row = $query->rowCount();
 
 	if (!$row) {
-		_res(500, ['info' => 'System under maintainance', 'error' => __LINE__]);
-		$db->rollBack();
+		_res(500, ['info' => 'Failed to create new password', 'error' => __LINE__]);
 	}
 
 	//success
-	$db->commit();
 	_res(200, ['info' => 'Password changed successfully']);
 } catch (Exception $ex) {
-	$db->rollBack();
 	_res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);
 }
