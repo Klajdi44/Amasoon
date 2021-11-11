@@ -41,9 +41,9 @@ try {
   $query->bindValue(':forgot_password_key', $forgot_password_key);
   $query->execute();
 
-  //TODO:change the info message below
+
   $user_id = $db->lastinsertid();
-  if (!$user_id) _res(400, ['info' => 'Wrong credentials', 'error' => __LINE__]);
+  if (!$user_id) _res(400, ['info' => 'Failed to create user', 'error' => __LINE__]);
 
   // Success
   $_to_email = "klajdiphp@gmail.com";

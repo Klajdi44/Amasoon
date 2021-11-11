@@ -17,25 +17,27 @@ require_once(__DIR__ . '/components/top.php');
       <legend>
         <label for="user_name">Your name</label>
         <small>e.g John Doe</small>
-        <input id="user_name" class="user_name" name="user_name" type="text" placeholder=" ">
+        <input id="user_name" class="user_name input" name="user_name" type="text" placeholder=" ">
       </legend>
       <legend>
         <label for="user_email">Email</label>
         <small>e.g John@doe.com</small>
-        <input id="user_email" class="user_email" name="user_email" type="text" placeholder=" ">
+        <input id="user_email" class="user_email input" name="user_email" type="text" placeholder=" ">
       </legend>
       <legend>
         <label for="user_password">Password</label>
         <small>At least 8 characters</small>
-        <input id="user_password" class="user_password" name="user_password" type="password" placeholder=" ">
+        <input id="user_password" class="user_password input" name="user_password" type="password" placeholder=" ">
       </legend>
       <legend>
         <label for="re-enter_user_password">Confirm password</label>
         <small>Must match password above</small>
-        <input id="re-enter_user_password" class="re-enter_user_password" name="re-enter_user_password" type="password" placeholder=" ">
+        <input id="re-enter_user_password input" class="re-enter_user_password input" name="re-enter_user_password" type="password" placeholder=" ">
       </legend>
       <legend class="form__btn__container">
-        <button class="signup__button auth__button" onclick="signup()">Create your Amasoon account</button>
+        <button class="signup__button auth__button" onclick="signup()">Create your amasoon account <span class="loader hidden">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </span></button>
       </legend>
       <div class="divider"></div>
       <p>Already have an account? <a href="login"> Sign in </a></p>
@@ -46,6 +48,9 @@ require_once(__DIR__ . '/components/top.php');
 
 <script>
   async function signup() {
+    let loading = true;
+    const loader = document.querySelector('.loader ');
+    loader?.classList.remove("hidden");
     const form = event.target.form
     try {
       const request = await fetch("api/api-signup", {
@@ -59,6 +64,8 @@ require_once(__DIR__ . '/components/top.php');
       if (request.ok) {
         location.href = "index"
       }
+      loader?.classList.add("hidden");
+
     } catch (error) {
       console.error(error.message);
     }

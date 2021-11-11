@@ -16,12 +16,12 @@ require_once(__DIR__ . '/components/top.php');
       <legend>
         <label for="user_email">Email</label>
         <small>e.g John@doe.com</small>
-        <input id="user_email" class="user_email" name="user_email" type="text" placeholder=" ">
+        <input id="user_email" class="user_email input" name="user_email" type="text" placeholder=" ">
       </legend>
       <legend>
         <label for="user_password">Password</label>
         <small>At least 8 characters</small>
-        <input id="user_password" class="user_password" name="user_password" type="password" placeholder=" ">
+        <input id="user_password" class="user_password input" name="user_password" type="password" placeholder=" ">
       </legend>
       <legend class="form__btn__container">
         <button class="auth__button  primary__btn" onclick="login()">Continue</button>
