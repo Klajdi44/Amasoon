@@ -12,7 +12,7 @@ require_once(__DIR__ . '/components/top.php');
   <div class="auth__wrapper">
     <form onsubmit="return false" class="auth__form">
       <h1 class="auth__form__title">Sign-in</h1>
-      <p class="auth__form__error"></p>
+      <p class="auth__form__error error"></p>
       <legend>
         <label for="user_email">Email</label>
         <small>e.g John@doe.com</small>

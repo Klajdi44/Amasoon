@@ -13,7 +13,7 @@ require_once(__DIR__ . '/components/top.php');
   <div class="signup__wrapper auth__wrapper">
     <form onsubmit="return false" class="auth__form signup__form">
       <h1 class="auth__form__title">Create account</h1>
-      <p class="auth__form__error"></p>
+      <p class="auth__form__error error"></p>
       <legend>
         <label for="user_name">Your name</label>
         <small>e.g John Doe</small>

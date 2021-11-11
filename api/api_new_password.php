@@ -3,13 +3,11 @@ include_once(__DIR__ . '/../private/globals.php');
 
 //validate key
 if (!isset($_POST['key'])) {
-	// (the key is missing so the user is trying to do something suspicious)
 	_res(400, ['info' => 'Suspicious...', 'error' => __LINE__]);
 	exit();
 }
 
 if (strlen($_POST['key']) != 32) {
-	//the key is not 32 characters long meaning user is doing something dodgy
 	_res(400, ['info' => 'Suspicious...', 'error' => __LINE__]);
 	exit();
 }

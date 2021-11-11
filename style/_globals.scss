@@ -64,3 +64,23 @@ p {
 .loader {
   font-size: 1.3em;
 }
+
+#success {
+  border: 1px solid var(--border-color);
+  color: var(--border-color);
+}
+
+.error {
+  padding: 0.5em 1.1em;
+  color: var(--color-error);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-error);
+  text-align: center;
+  &::first-letter {
+    text-transform: capitalize;
+  }
+
+  &:empty {
+    display: none;
+  }
+}

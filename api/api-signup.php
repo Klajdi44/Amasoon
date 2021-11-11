@@ -46,7 +46,7 @@ try {
   if (!$user_id) _res(400, ['info' => 'Failed to create user', 'error' => __LINE__]);
 
   // Success
-  $_to_email = "klajdiphp@gmail.com";
+  $_to_email = $_POST['user_email'];
   $_name = $_POST['user_name'];
   $_subject = "Email verification";
   $_message = "Thank you for signing up $_name!,

@@ -5,7 +5,7 @@ include_once(__DIR__ . '/components/top.php');
 <section class="forgot__password__container">
 	<?php require_once(__DIR__ . '/components/logo.php') ?>
 
-	<p class="forgot__password__info"></p>
+	<p class="forgot__password__info error"></p>
 
 	<article class="forgot__password ">
 
@@ -41,7 +41,7 @@ include_once(__DIR__ . '/components/top.php');
 			document.querySelector('.forgot__password__info').textContent = response?.info;
 
 			if (request.ok) {
-				infoElement.classList.add('success');
+				infoElement.id = 'success';
 			}
 			loader.classList.add("hidden");
 

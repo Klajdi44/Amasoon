@@ -77,7 +77,7 @@ require_once(__DIR__ . '/components/top.php');
 			infoElement.textContent = response?.info;
 
 			if (request.ok) {
-				infoElement.classList.add('success');
+				infoElement.id = 'success';
 
 				setTimeout(() => {
 					window.location.href = "login";
@@ -93,6 +93,3 @@ require_once(__DIR__ . '/components/top.php');
 <?php
 require_once(__DIR__ . '/components/bottom.php');
 ?>
-
-<!-- TODO: if email sent successfully then show that (maybe redirect users or show options to redirect)-->
-<!-- TODO: if password changed successfully then show that and display options for redirecting-->

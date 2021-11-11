@@ -1,17 +1,4 @@
 /******* signup *******/
-.auth__form__error {
-  padding: 0.5em 0.3em;
-  color: var(--color-error);
-  border-radius: var(--border-radius);
-
-  &::first-letter {
-    text-transform: capitalize;
-  }
-
-  &:empty {
-    display: none;
-  }
-}
 .auth__container {
   display: flex;
   justify-content: center;
