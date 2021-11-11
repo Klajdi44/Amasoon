@@ -9,7 +9,7 @@ include_once(__DIR__ . '/components/top.php');
 
 	<article class="forgot__password ">
 
-		<h1>Password assistance</h1>
+		<h1 class="forgot__password__title">Password assistance</h1>
 		<p>Enter the email address associated with your Amasoon account.</p>
 
 
