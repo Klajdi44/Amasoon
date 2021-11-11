@@ -13,7 +13,12 @@ if (strlen($_POST['key']) != 32) {
 	_res(400, ['info' => 'Suspicious...', 'error' => __LINE__]);
 	exit();
 }
-//TODO: Authenticate the user passwords
+
+// Validate the password
+if (!isset($_POST['user_password'])) _res(400, ['info' => 'password required']);
+if (strlen($_POST['user_password']) < _PASSWORD_MIN_LEN) _res(400, ['info' => 'Password must be at least ' . _PASSWORD_MIN_LEN . ' characters long', 'error' => __LINE__]);
+if (strlen($_POST['user_password']) > _PASSWORD_MAX_LEN) _res(400, ['info' => 'Password cannot be more than' . _PASSWORD_MAX_LEN . ' characters long', 'error' => __LINE__]);
+if ($_POST['user_password'] != $_POST['confirm_user_password']) _res(400, ['info' => 'Passwords do not match', 'error' => __LINE__]);
 
 $db = _db();
 
