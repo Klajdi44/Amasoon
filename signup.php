@@ -50,7 +50,7 @@ require_once(__DIR__ . '/components/top.php');
   async function signup() {
     let loading = true;
     const loader = document.querySelector('.loader ');
-    loader?.classList.remove("hidden");
+    loader.classList.remove("hidden");
     const form = event.target.form
     try {
       const request = await fetch("api/api-signup", {
@@ -64,7 +64,7 @@ require_once(__DIR__ . '/components/top.php');
       if (request.ok) {
         location.href = "index"
       }
-      loader?.classList.add("hidden");
+      loader.classList.add("hidden");
 
     } catch (error) {
       console.error(error.message);

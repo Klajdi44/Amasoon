@@ -27,7 +27,7 @@ include_once(__DIR__ . '/components/top.php');
 	async function sendRecoveryEmail() {
 		try {
 			const loader = document.querySelector('.loader ');
-			loader?.classList.remove("hidden");
+			loader.classList.remove("hidden");
 			const formdata = new FormData(event.target.form);
 			const infoElement = document.querySelector('.forgot__password__info')
 			const request = await fetch('api/api-forgot-password.php', {
@@ -42,9 +42,8 @@ include_once(__DIR__ . '/components/top.php');
 
 			if (request.ok) {
 				infoElement.classList.add('success');
-				document.querySelector('')
 			}
-			loader?.classList.add("hidden");
+			loader.classList.add("hidden");
 
 		} catch (error) {
 			console.error(error.message)
