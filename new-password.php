@@ -5,7 +5,7 @@ require_once(__DIR__ . '/components/top.php');
 <section class="new__password__container">
 	<?php require_once(__DIR__ . '/components/logo.php') ?>
 
-	<p class="new__password__info"></p>
+	<p class="new__password__info error"></p>
 
 	<article class="new__password ">
 		<h1 class="new__password__title"> Create a new password! </h1>
@@ -13,33 +13,34 @@ require_once(__DIR__ . '/components/top.php');
 			<legend>
 				<label for="user_password">Password</label>
 				<small>At least 8 characters</small>
-				<input minlength="8" maxlength="20" id="user_password" class="user_password" name="user_password" type="password" placeholder=" ">
+				<input id="user_password" class="user_password input" name="user_password" type="password" placeholder=" ">
 			</legend>
 
 			<legend>
 				<label for="confirm_user_password">Confirm password</label>
 				<small>Must match password above</small>
-				<input minlength="8" maxlength="20" id="confirm_user_password" class="confirm_user_password" name="confirm_user_password" type="password" placeholder=" ">
+				<input id="confirm_user_password" class="confirm_user_password input" name="confirm_user_password" type="password" placeholder=" ">
 			</legend>
 
-			<button class="new__password__btn primary__btn" onclick="createNewPassword()">Create</button>
+			<button class="new__password__btn primary__btn">Create</button>
+			<!-- <button class="new__password__btn primary__btn" onclick="createNewPassword()">Create</button> -->
 		</form>
 	</article>
 </section>
 
 
-<script>
+<script type="module">
+	document.querySelector('.new__password__btn').addEventListener('click', createNewPassword);
+
 	async function createNewPassword() {
-		<?php include_once(__DIR__ . "./private/globals.php") ?>
 		const infoElement = document.querySelector('.new__password__info');
 		const password = document.querySelector('.user_password');
 		const confirmPassword = document.querySelector('.confirm_user_password');
-
 		const urlParams = new URLSearchParams(window.location.search);
-
 		const key = urlParams.has('key') ? urlParams.get('key') : null;
 		const formData = new FormData(event.target.form)
 		formData.append('key', key);
+
 
 		//validation
 		if (!key || key?.length != 32) {
@@ -54,10 +55,10 @@ require_once(__DIR__ . '/components/top.php');
 			return infoElement.textContent = "Passwords do not match!"
 		}
 
-		if (password.value.length < 8) {
+		if (password.value.length < _PASSWORD_MIN_LEN) {
 			return infoElement.textContent = "Password has be at least 8 characters long"
 		}
-		if (password.value.length > 16) {
+		if (password.value.length > _PASSWORD_MAX_LEN) {
 			return infoElement.textContent = "Password cannot be more that 16 characters"
 		}
 
