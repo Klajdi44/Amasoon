@@ -45,7 +45,6 @@ try {
   $user_id = $db->lastinsertid();
   if (!$user_id) _res(400, ['info' => 'Failed to create user', 'error' => __LINE__]);
 
-  // Success
   $_to_email = $_POST['user_email'];
   $_name = $_POST['user_name'];
   $_subject = "Email verification";
@@ -53,10 +52,11 @@ try {
    <a href='http://localhost:8080/amasoon/verify-email.php?key=$verification_key'> click here to verify your account </a>";
   require_once(__DIR__ . '/../private/send_email.php');
 
+  // Success
   session_start();
   $_SESSION['user_name'] = $_POST['user_name'];
   $_SESSION['user_id'] = $user_id;
-  _res(200, ['info' => 'success signup', "user_id" => $user_id]);
+  _res(200, ['info' => 'Signed up successfully', "user_id" => $user_id]);
 } catch (Exception $ex) {
   _res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);
 }

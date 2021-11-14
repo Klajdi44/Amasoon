@@ -36,16 +36,14 @@ require_once(__DIR__ . '/components/top.php');
 		const infoElement = document.querySelector('.new__password__info');
 		const password = document.querySelector('.user_password');
 		const confirmPassword = document.querySelector('.confirm_user_password');
-		const urlParams = new URLSearchParams(window.location.search);
-		const key = urlParams.has('key') ? urlParams.get('key') : null;
+		const key = "<?= $_GET['key'] ?>"
 		const formData = new FormData(event.target.form)
-		formData.append('key', key);
-
 
 		//validation
 		if (!key || key?.length != 32) {
 			return infoElement.textContent = "Suspicious"
 		}
+		formData.append('key', key);
 
 		if (!password.value.length || !confirmPassword.value.length) {
 			return infoElement.textContent = "Fields cannot be empty!"
@@ -82,7 +80,7 @@ require_once(__DIR__ . '/components/top.php');
 
 				setTimeout(() => {
 					window.location.href = "login";
-				}, 2000);
+				}, 4000);
 			}
 		} catch (error) {
 			console.error(error.message);

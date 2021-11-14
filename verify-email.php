@@ -1,46 +1,57 @@
 <?php
-if (!isset($_GET['key'])) {
-	// (the key is missing so the user is trying to do something suspicious)
-	echo "Suspicious...";
-	exit();
+session_start();
+if ($_SESSION['is_verified']) {
+	header('Location: index');
 }
+?>
 
-if (strlen($_GET['key']) != 32) {
-	//the key is not 32 characters long meaning user is doing something dodgy
-	echo "Suspicious...";
-	exit();
-}
+<?php require_once(__DIR__ . '/components/top.php') ?>
+<section class="verify__email__container center">
+	<article class="verify__email">
+		<?php require_once(__DIR__ . '/components/logo.php') ?>
+		<p class="verify__email__info error"></p>
+		<p class="loader">Loading...</p>
+	</article>
+</section>
 
-require_once(__DIR__ . '/private/globals.php');
 
-$db = _db();
+<script>
+	verify_email();
+	async function verify_email() {
+		const formData = new FormData();
+		const key = "<?= $_GET['key'] ?>";
+		const loader = document.querySelector('.loader');
+		const infoElement = document.querySelector('.verify__email__info');
 
-try {
-	$query = $db->prepare('SELECT * FROM users where user_verification_key = :user_verification_key');
-	$query->bindValue(":user_verification_key", $_GET['key']);
-	$query->execute();
-	$row = $query->fetch();
 
-	if (!$row) {
-		_res(400, ['info' => 'Verification key missmatch, try again later or contact support', 'error' => __LINE__]);
+		//validation
+		if (!key || key?.length != 32) {
+			loader.classList.add('hidden');
+			return infoElement.textContent = "Suspicious...";
+		}
+		formData.append('key', key);
+
+		try {
+			const request = await fetch('api/api-verify-email.php', {
+				method: "POST",
+				body: formData
+			});
+			const response = await request.json();
+
+			loader.classList.add('hidden');
+			infoElement.textContent = response?.info;
+
+			if (request.ok) {
+				infoElement.id = 'success';
+				setTimeout(() => {
+					window.location.href = "login";
+				}, 4000);
+			}
+
+		} catch (error) {
+			console.error(error.message)
+		}
+
 	}
-
-	if ($row['is_verified']) {
-		header('Location: index');
-		exit();
-	}
-
-
-	$query = $db->prepare('UPDATE users SET is_verified = 1 WHERE user_verification_key = :user_verification_key ');
-	$query->bindValue(":user_verification_key", $_GET['key']);
-	$query->execute();
-	$row = $query->rowCount();
-
-	if (!$row) {
-		_res(500, ['info' => 'Could not verify email, please try again later', 'error' => __LINE__]);
-	}
-
-	// header('Location: index');
-} catch (Exception $ex) {
-	_res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);
-}
+</script>
+<?php require_once(__DIR__ . '/components/bottom.php') ?>
