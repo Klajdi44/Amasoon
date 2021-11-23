@@ -10,6 +10,19 @@ small {
   display: block;
 }
 
+.input {
+  width: 100%;
+  min-height: 40px;
+  text-indent: 5px;
+  border: 1px solid #a6a6a6;
+  border-radius: var(--border-radius);
+
+  &:focus {
+    border: 1px solid var(--border-color);
+    outline: 3px solid var(--color--accent);
+  }
+}
+
 label {
   font-size: 1.1em;
   font-weight: 700;
@@ -22,8 +35,59 @@ a {
   text-decoration: none;
   color: var(--color-anchor);
 }
+p {
+  line-height: 160%;
+  color: rgb(85, 80, 80);
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .hidden,
 .none {
   display: none;
+}
+
+.shown {
+  display: block;
+}
+
+.logo {
+  margin: 0.3em 0;
+  width: 200px;
+}
+
+.loader {
+  font-size: 1.3em;
+}
+
+#success {
+  border: 1px solid var(--border-color);
+  color: var(--border-color);
+}
+
+.error {
+  padding: 0.5em 1.1em;
+  color: var(--color-error);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-error);
+  text-align: center;
+  &::first-letter {
+    text-transform: capitalize;
+  }
+
+  &:empty {
+    display: none;
+  }
+}
+
+.center {
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
 }

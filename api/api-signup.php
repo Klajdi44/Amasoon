@@ -7,7 +7,7 @@ if (strlen($_POST['user_name']) < _USERNAME_MIN_LEN) _res(400, ['info' => 'Name 
 if (strlen($_POST['user_name']) > _USERNAME_MAX_LEN) _res(400, ['info' => 'Name cannot be more than' . _USERNAME_MAX_LEN . ' characters long', 'error' => __LINE__]);
 
 //validate email
-if (!isset($_POST['user_email']) || (strlen($_POST['user_email']) <= 0)) _res(400, ['info' => 'email required', 'error' => __LINE__]);
+if (!isset($_POST['user_email'])) _res(400, ['info' => 'email required', 'error' => __LINE__]);
 if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) _res(400, ['info' => 'Email is invalid', 'error' => __LINE__]);
 
 
@@ -30,31 +30,33 @@ try {
 
   $password_hash = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
   $verification_key = bin2hex(random_bytes(16));
+  $forgot_password_key = bin2hex(random_bytes(16));
 
-  $query = $db->prepare('INSERT INTO users(user_id,user_name,user_email,user_password,user_verification_key) VALUES(:user_id,:user_name,:user_email, :user_password,:user_verification_key)');
+  $query = $db->prepare('INSERT INTO users(user_id,user_name,user_email,user_password,user_verification_key,forgot_password_key) VALUES(:user_id,:user_name,:user_email, :user_password,:user_verification_key,:forgot_password_key)');
   $query->bindValue(':user_id', null);
   $query->bindValue(':user_name', $_POST['user_name']);
   $query->bindValue(':user_email', $_POST['user_email']);
   $query->bindValue(':user_password', $password_hash);
   $query->bindValue(':user_verification_key', $verification_key);
+  $query->bindValue(':forgot_password_key', $forgot_password_key);
   $query->execute();
 
-  //TODO:change the info message below
-  $user_id = $db->lastinsertid();
-  if (!$user_id) _res(400, ['info' => 'Wrong credentials', 'error' => __LINE__]);
 
-  // Success
-  $_to_email = "klajdiphp@gmail.com";
+  $user_id = $db->lastinsertid();
+  if (!$user_id) _res(400, ['info' => 'Failed to create user', 'error' => __LINE__]);
+
+  $_to_email = $_POST['user_email'];
   $_name = $_POST['user_name'];
   $_subject = "Email verification";
   $_message = "Thank you for signing up $_name!,
    <a href='http://localhost:8080/amasoon/verify-email.php?key=$verification_key'> click here to verify your account </a>";
   require_once(__DIR__ . '/../private/send_email.php');
 
+  // Success
   session_start();
   $_SESSION['user_name'] = $_POST['user_name'];
   $_SESSION['user_id'] = $user_id;
-  _res(200, ['info' => 'success signup', "user_id" => $user_id]);
+  _res(200, ['info' => 'Signed up successfully', "user_id" => $user_id]);
 } catch (Exception $ex) {
   _res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);
 }

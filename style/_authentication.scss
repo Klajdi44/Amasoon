@@ -1,17 +1,4 @@
 /******* signup *******/
-.auth__form__error {
-  padding: 0.5em 0.3em;
-  color: #ff0000c2;
-  border-radius: var(--border-radius);
-
-  &::first-letter {
-    text-transform: capitalize;
-  }
-
-  &:empty {
-    display: none;
-  }
-}
 .auth__container {
   display: flex;
   justify-content: center;
@@ -30,18 +17,6 @@
   &__title {
     font-weight: 400;
   }
-  input {
-    width: 100%;
-    min-height: 40px;
-    text-indent: 5px;
-    border: 1px solid #a6a6a6;
-    border-radius: var(--border-radius);
-
-    &:focus {
-      border: 1px solid var(--border-color);
-      outline: 3px solid var(--color--accent);
-    }
-  }
   small {
     margin-bottom: 5px;
   }
@@ -53,7 +28,9 @@
 .form__btn__container {
   text-align: center;
 }
-.auth__button {
+.auth__button,
+.primary__btn {
+  @extend .signup__button;
   width: 100%;
   padding: 10px 0;
   margin-bottom: 1em;
@@ -67,11 +44,6 @@
   &:hover {
     background: var(--color-accent);
   }
-}
-
-.logo {
-  margin: 0.3em 0;
-  width: 200px;
 }
 
 .divider {
@@ -96,6 +68,19 @@
   &:hover {
     background: linear-gradient(to bottom, #e7eaf0, #d9dce1);
   }
+}
+.auth__need__help {
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--color-anchor);
+  &::marker {
+    color: #000;
+  }
+}
+
+.auth__forgot__password {
+  padding-left: 17px;
+  font-size: 16px;
 }
 
 .new__to__amasoon {
