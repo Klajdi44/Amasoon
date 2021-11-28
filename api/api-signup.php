@@ -35,7 +35,7 @@ try {
     _res(400, ['info' => 'Email already exists', 'error' => __LINE__]);
   }
 
-  if ($row['user_phone_number']) {
+  if ($row['user_phone_number'] === $_POST['user_phone_number']) {
     _res(400, ['info' => 'Phone number already exists', 'error' => __LINE__]);
   }
 
