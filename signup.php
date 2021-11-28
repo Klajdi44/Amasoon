@@ -25,6 +25,11 @@ require_once(__DIR__ . '/components/top.php');
         <input id="user_email" class="user_email input" name="user_email" type="text" placeholder=" ">
       </legend>
       <legend>
+        <label for="user_phone_number">Phone number</label>
+        <small>Only Danish numbers e.g 40636096</small>
+        <input id="user_phone_number" class="user_phone_number input" name="user_phone_number" type="tel" placeholder=" ">
+      </legend>
+      <legend>
         <label for="user_password">Password</label>
         <small>At least 8 characters</small>
         <input id="user_password" class="user_password input" name="user_password" type="password" placeholder=" ">
@@ -32,7 +37,7 @@ require_once(__DIR__ . '/components/top.php');
       <legend>
         <label for="re-enter_user_password">Confirm password</label>
         <small>Must match password above</small>
-        <input id="re-enter_user_password input" class="re-enter_user_password input" name="re-enter_user_password" type="password" placeholder=" ">
+        <input id="re-enter_user_password" class="re-enter_user_password input" name="re-enter_user_password" type="password" placeholder=" ">
       </legend>
       <legend class="form__btn__container">
         <button class="signup__button auth__button" onclick="signup()">Create your amasoon account <span class="loader hidden">

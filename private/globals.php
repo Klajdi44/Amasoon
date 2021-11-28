@@ -3,7 +3,7 @@ define('_USERNAME_MIN_LEN', 1);
 define('_USERNAME_MAX_LEN', 50);
 define('_PASSWORD_MIN_LEN', 8);
 define('_PASSWORD_MAX_LEN', 20);
-
+define('_PHONE_LEN', 8);
 
 function _res($status = 200, $message = [], $exit = true)
 {
@@ -11,6 +11,19 @@ function _res($status = 200, $message = [], $exit = true)
   header('Content-Type: application/json');
   echo json_encode($message);
   if ($exit) exit();
+}
+
+$_sms_api_key = '87ebf26b-37b1-4a5d-8eba-7bfd4709d2f3';
+
+function _curl_post($url, $data)
+{
+  $curl = curl_init($url);
+  curl_setopt($curl, CURLOPT_POST, true);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  $response = curl_exec($curl);
+  curl_close($curl);
+  return  $response;
 }
 
 function _is_user_signed_in()
