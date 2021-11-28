@@ -71,10 +71,12 @@ require_once(__DIR__ . '/components/top.php');
       if (request.ok) {
         location.href = "index"
       }
-      loader.classList.add("hidden");
       btn.disabled = false;
+      loader.classList.add("hidden");
     } catch (error) {
       console.error(error.message);
+      btn.disabled = false;
+      loader.classList.add("hidden");
     }
   }
 </script>
