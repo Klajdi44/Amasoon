@@ -72,6 +72,7 @@ require_once(__DIR__ . '/components/top.php');
 
     } catch (error) {
       console.error(error.message);
+      loader.classList.add("hidden");
     }
 
   }

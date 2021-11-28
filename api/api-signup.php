@@ -24,13 +24,19 @@ if (!ctype_digit($_POST['user_phone_number'])) _res(400, ['info' => 'Phone numbe
 
 $db = _db();
 try {
-  $query = $db->prepare('SELECT * FROM users WHERE user_email = :user_email');
+  $query = $db->prepare('SELECT * FROM users WHERE user_email = :user_email OR user_phone_number = :user_phone_number');
   $query->bindValue('user_email', $_POST['user_email']);
+  $query->bindValue('user_phone_number', $_POST['user_phone_number']);
   $query->execute();
   $row = $query->fetch();
 
-  if ($row) {
+
+  if ($row['user_email'] === $_POST['user_email']) {
     _res(400, ['info' => 'Email already exists', 'error' => __LINE__]);
+  }
+
+  if ($row['user_phone_number']) {
+    _res(400, ['info' => 'Phone number already exists', 'error' => __LINE__]);
   }
 
   $password_hash = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
