@@ -81,7 +81,7 @@ try {
     'email' => $_POST['email'],
     'to_phone' => $_POST['user_phone_number'],
     'api_key' => $_sms_api_key,
-    'message' =>  "Thank you for signing up on Amasson! Please verify your account on your email!"
+    'message' =>  "Thank you for signing up on Amasoon! Please verify your account on your email!"
   ];
   $sms_response = _curl_post($url, $data);
 

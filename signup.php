@@ -54,8 +54,11 @@ require_once(__DIR__ . '/components/top.php');
 <script>
   async function signup() {
     const loader = document.querySelector('.loader ');
+    const btn = document.querySelector('.signup__button');
     loader.classList.remove("hidden");
+    btn.disabled = true;
     const form = event.target.form
+
     try {
       const request = await fetch("api/api-signup", {
         method: "POST",
@@ -69,12 +72,10 @@ require_once(__DIR__ . '/components/top.php');
         location.href = "index"
       }
       loader.classList.add("hidden");
-
+      btn.disabled = false;
     } catch (error) {
       console.error(error.message);
-      loader.classList.add("hidden");
     }
-
   }
 </script>
 
