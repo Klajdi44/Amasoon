@@ -29,7 +29,12 @@ function _curl_post($url, $data)
 function _is_user_signed_in()
 {
   session_start();
-  return $_SESSION['user_id'];
+  if (!isset($_SESSION['user_id'])) {
+    return false;
+  } else {
+    return true;
+  }
+  exit();
 }
 
 

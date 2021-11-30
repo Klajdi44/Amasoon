@@ -68,6 +68,9 @@ try {
   session_start();
   $_SESSION['user_name'] = $_POST['user_name'];
   $_SESSION['user_id'] = $user_id;
+  $_SESSION['user_email'] = $_POST['user_email'];
+  $_SESSION['user_phone_number'] = $_POST['user_phone_number'];
+  $_SESSION['is_verified'] = false;
   _res(200, ['info' => 'Signed up successfully', "user_id" => $user_id], false);
 } catch (Exception $ex) {
   _res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);

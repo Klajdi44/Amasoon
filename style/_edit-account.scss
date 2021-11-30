@@ -1,0 +1,30 @@
+.edit__account {
+  padding: var(--padding);
+
+  &__content__wrapper {
+    width: clamp(280px, 100%, 700px);
+    margin: 0 auto;
+  }
+  &__title {
+    font-weight: 400;
+    margin-top: 16px;
+  }
+  &__container {
+    border: 1px solid var(--border-color);
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  &__field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__edit__btn {
+    padding: 5px 20px;
+  }
+}

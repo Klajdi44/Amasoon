@@ -91,3 +91,16 @@ p {
   display: grid;
   place-content: center;
 }
+
+.secondary-button {
+  background: linear-gradient(to bottom, #f7f8fa, #e7e9ec);
+  border: 1px solid;
+  border-color: #adb1b8 #a2a6ac #8d9096;
+  padding: 10px 0;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+
+  &:hover {
+    background: linear-gradient(to bottom, #e7eaf0, #d9dce1);
+  }
+}

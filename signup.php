@@ -66,7 +66,6 @@ require_once(__DIR__ . '/components/top.php');
       })
 
       const response = await request.json();
-      console.log(response);
       document.querySelector('.auth__form__error').textContent = response?.info;
       if (request.ok) {
         location.href = "index"
