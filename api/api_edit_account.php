@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . '/../private/globals.php');
-echo $_POST['user_name'];
+
 // **validation**
 //Name
 if (!isset($_POST['user_name'])) _res(400, ['info' => 'Name required', 'error' => __LINE__]);
@@ -19,10 +19,6 @@ if (!ctype_digit($_POST['user_phone_number'])) _res(400, ['info' => 'Phone numbe
 $db = _db();
 
 try {
-	// $query = $db->prepare('SELECT * FROM users WHERE user_id = :user_id');
-	// $query->bindValue(':user_id', $_SESSION['user_id']);
-	// $query->execute();
-	// $row = $query->fetch();
 	session_start();
 	$has_email_changed =  $_POST['user_email'] != $_SESSION['user_email'] ? true : false;
 
