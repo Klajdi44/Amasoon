@@ -11,9 +11,8 @@ if (!_is_user_signed_in()) {
 
 <main class='edit__account'>
 	<div class="edit__account__content__wrapper">
-		<h2 class="edit__account__title">Name</h2>
+		<h2 class="edit__account__title">Name, Number & Email</h2>
 		<p class="edit__account__error error"></p>
-
 		<form id="form" onsubmit="return false" class="edit__account__container">
 			<legend class="edit__account__field user_name">
 				<label for="user_name">Full name</label>
@@ -72,8 +71,10 @@ if (!_is_user_signed_in()) {
 				body: formData
 			});
 			const response = await request.json();
-			dqs('.error').textContent = response?.info;
+			const error = dqs('.error');
+			error.textContent = response?.info;
 			if (request.ok) {
+				error.id = 'success';
 				setTimeout(() => {
 					window.location.reload();
 				}, 1000);
