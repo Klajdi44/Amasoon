@@ -37,6 +37,16 @@ function _is_user_signed_in()
   exit();
 }
 
+function  _contains_number($string)
+{
+  for ($i = 0; $i < strlen($string); $i++) {
+    if (ctype_digit($string[$i])) {
+      return true;
+    }
+  }
+  return false;
+}
+
 
 function _db()
 {

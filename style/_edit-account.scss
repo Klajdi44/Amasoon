@@ -9,6 +9,9 @@
     font-weight: 400;
     margin-top: 28px;
   }
+  &__error {
+    text-align: center;
+  }
   &__container {
     border: 1px solid var(--border-color);
     padding: 10px 30px;

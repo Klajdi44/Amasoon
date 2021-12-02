@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../private/globals.php');
 if (!isset($_POST['user_name'])) _res(400, ['info' => 'Name required', 'error' => __LINE__]);
 if (strlen($_POST['user_name']) < _USERNAME_MIN_LEN) _res(400, ['info' => 'Name must be at least ' . _USERNAME_MIN_LEN . ' characters long', 'error' => __LINE__]);
 if (strlen($_POST['user_name']) > _USERNAME_MAX_LEN) _res(400, ['info' => 'Name cannot be more than' . _USERNAME_MAX_LEN . ' characters long', 'error' => __LINE__]);
+if (_contains_number($_POST['user_name'])) _res(400, ['info' => 'Name cannot contain numbers', 'error' => __LINE__]);
 
 //validate email
 if (!isset($_POST['user_email'])) _res(400, ['info' => 'email required', 'error' => __LINE__]);

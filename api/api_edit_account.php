@@ -6,6 +6,8 @@ require_once(__DIR__ . '/../private/globals.php');
 if (!isset($_POST['user_name'])) _res(400, ['info' => 'Name required', 'error' => __LINE__]);
 if (strlen($_POST['user_name']) < _USERNAME_MIN_LEN) _res(400, ['info' => 'Name must be at least ' . _USERNAME_MIN_LEN . ' characters long', 'error' => __LINE__]);
 if (strlen($_POST['user_name']) > _USERNAME_MAX_LEN) _res(400, ['info' => 'Name cannot be more than' . _USERNAME_MAX_LEN . ' characters long', 'error' => __LINE__]);
+if (_contains_number($_POST['user_name'])) _res(400, ['info' => 'Name cannot contain numbers', 'error' => __LINE__]);
+
 
 // email
 if (!isset($_POST['user_email'])) _res(400, ['info' => 'email required', 'error' => __LINE__]);
@@ -19,6 +21,8 @@ if (!ctype_digit($_POST['user_phone_number'])) _res(400, ['info' => 'Phone numbe
 $db = _db();
 
 try {
+	$db->beginTransaction();
+
 	session_start();
 	$has_email_changed =  $_POST['user_email'] != $_SESSION['user_email'] ? true : false;
 
@@ -32,8 +36,34 @@ try {
 
 	if (!$row) {
 		_res(500, ['info' => 'Failed to update fields', 'error' => __LINE__]);
+		$db->rollBack();
+	}
+	if ($has_email_changed) {
+
+		$verification_key = bin2hex(random_bytes(16));
+		$q = $db->prepare('UPDATE users SET is_verified = :is_verified,user_verification_key = :user_verification_key WHERE user_id = :user_id');
+		$q->bindValue(':user_id', $_SESSION['user_id']);
+		$q->bindValue(':user_verification_key', $verification_key);
+		$q->bindValue(':is_verified', 0);
+		$q->execute();
+		$r = $query->rowCount();
+
+		if (!$r) {
+			_res(500, ['info' => 'Failed to update fields', 'error' => __LINE__]);
+			$db->rollBack();
+		}
+
+		$_to_email = $_POST['user_email'];
+		$_name = $_POST['user_name'];
+		$_subject = "Email verification";
+		$_message = "Email changed $_name,
+		 <a href='http://localhost:8080/amasoon/verify-email.php?key=$verification_key'> click here to verify your email </a>";
+		require_once(__DIR__ . '/../private/send_email.php');
+
+		$_SESSION['is_verified'] = 0;
 	}
 
+	$db->commit();
 	$_SESSION['user_name'] = $_POST['user_name'];
 	$_SESSION['user_email'] = $_POST['user_email'];
 	$_SESSION['user_phone_number'] = $_POST['user_phone_number'];
