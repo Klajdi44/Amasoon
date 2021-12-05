@@ -31,8 +31,11 @@ try {
 
   // Success
   session_start();
-  $_SESSION['user_id'] = $row['user_id'];
-  $_SESSION['user_name'] = $row['user_name'];
+  unset($row['user_password']);
+  unset($row['forgot_password_key']);
+  unset($row['user_verification_key']);
+  $_SESSION = $row;
+
   _res(200, ['info' => 'success login']);
 } catch (Exception $ex) {
   _res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);

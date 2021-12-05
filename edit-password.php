@@ -1,25 +1,23 @@
 <?php
-require_once(__DIR__ . '/components/top.php');
-$_title = 'Create a new password!';
-$_show_logo = true;
-require_once(__DIR__ . '/components/password.php');
+include_once(__DIR__ . '/private/globals.php');
+
+if (!_is_user_signed_in()) {
+	header('Location: index');
+}
+$_show_nav = true;
+@require_once(__DIR__ . '/components/top.php');
+$_title = 'Edit your current password';
+@require_once(__DIR__ . '/components/password.php');
 ?>
 
 <script type="module">
-	dqs('.new__password__btn').onclick = createNewPassword;
+	dqs('.new__password__btn').onclick = editPassword;
 
-	async function createNewPassword() {
+	async function editPassword() {
 		const infoElement = dqs('.new__password__info');
 		const password = dqs('.user_password');
 		const confirmPassword = dqs('.confirm_user_password');
-		const key = "<?= $_GET['key'] ?>"
-		const formData = new FormData(event.target.form)
-
-		//validation
-		if (!key || key?.length != 32) {
-			return infoElement.textContent = "Suspicious"
-		}
-		formData.append('key', key);
+		const formData = new FormData(event.target.form);
 
 		if (!password.value.length || !confirmPassword.value.length) {
 			return infoElement.textContent = "Fields cannot be empty!"
@@ -41,7 +39,7 @@ require_once(__DIR__ . '/components/password.php');
 		}
 
 		try {
-			let request = await fetch("api/api_new_password", {
+			let request = await fetch("api/api_edit_password", {
 				method: "POST",
 				body: formData
 			})
@@ -55,16 +53,13 @@ require_once(__DIR__ . '/components/password.php');
 				infoElement.id = 'success';
 
 				setTimeout(() => {
-					window.location.href = "login";
-				}, 4000);
+					window.location.href = "edit-account.php";
+				}, 2500);
 			}
 		} catch (error) {
 			console.error(error.message);
 		}
-
 	}
 </script>
 
-<?php
-require_once(__DIR__ . '/components/bottom.php');
-?>
+<?php require_once(__DIR__ . '/components/bottom.php') ?>

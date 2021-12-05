@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../private/globals.php');
 if (!isset($_POST['user_name'])) _res(400, ['info' => 'Name required', 'error' => __LINE__]);
 if (strlen($_POST['user_name']) < _USERNAME_MIN_LEN) _res(400, ['info' => 'Name must be at least ' . _USERNAME_MIN_LEN . ' characters long', 'error' => __LINE__]);
 if (strlen($_POST['user_name']) > _USERNAME_MAX_LEN) _res(400, ['info' => 'Name cannot be more than' . _USERNAME_MAX_LEN . ' characters long', 'error' => __LINE__]);
+if (_contains_number($_POST['user_name'])) _res(400, ['info' => 'Name cannot contain numbers', 'error' => __LINE__]);
 
 //validate email
 if (!isset($_POST['user_email'])) _res(400, ['info' => 'email required', 'error' => __LINE__]);
@@ -66,8 +67,8 @@ try {
 
   // Success
   session_start();
-  $_SESSION['user_name'] = $_POST['user_name'];
-  $_SESSION['user_id'] = $user_id;
+  $_SESSION = ['user_name' => $_POST['user_name'], 'user_id' => $user_id, 'user_email' => $_POST['user_email'], 'user_phone_number' => $_POST['user_phone_number'], 'is_verified' => false];
+
   _res(200, ['info' => 'Signed up successfully', "user_id" => $user_id], false);
 } catch (Exception $ex) {
   _res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);

@@ -1,6 +1,6 @@
 <?php
-include_once('./components/top.php');
-include_once('./components/nav.php');
+$_show_nav = true;
+include_once(__DIR__ . '/components/top.php');
 ?>
 
 

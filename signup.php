@@ -40,7 +40,7 @@ require_once(__DIR__ . '/components/top.php');
         <input id="re-enter_user_password" class="re-enter_user_password input" name="re-enter_user_password" type="password" placeholder=" ">
       </legend>
       <legend class="form__btn__container">
-        <button class="signup__button auth__button" onclick="signup()">Create your amasoon account <span class="loader hidden">
+        <button class="signup__button auth__button">Create your amasoon account <span class="loader hidden">
             <i class="fas fa-circle-notch fa-spin"></i>
           </span></button>
       </legend>
@@ -51,10 +51,11 @@ require_once(__DIR__ . '/components/top.php');
   </div>
 </div>
 
-<script>
+<script type='module'>
+  dqs('.signup__button').onclick = signup;
   async function signup() {
-    const loader = document.querySelector('.loader ');
-    const btn = document.querySelector('.signup__button');
+    const loader = dqs('.loader ');
+    const btn = dqs('.signup__button');
     loader.classList.remove("hidden");
     btn.disabled = true;
     const form = event.target.form
@@ -66,10 +67,9 @@ require_once(__DIR__ . '/components/top.php');
       })
 
       const response = await request.json();
-      console.log(response);
-      document.querySelector('.auth__form__error').textContent = response?.info;
+      dqs('.auth__form__error').textContent = response?.info;
       if (request.ok) {
-        location.href = "index"
+        location.href = "index";
       }
       btn.disabled = false;
       loader.classList.add("hidden");
