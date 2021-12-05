@@ -35,9 +35,9 @@ require_once(__DIR__ . '/components/top.php');
         <input id="user_password" class="user_password input" name="user_password" type="password" placeholder=" ">
       </legend>
       <legend>
-        <label for="re-enter_user_password">Confirm password</label>
+        <label for="confirm_password">Confirm password</label>
         <small>Must match password above</small>
-        <input id="re-enter_user_password" class="re-enter_user_password input" name="re-enter_user_password" type="password" placeholder=" ">
+        <input id="confirm_password" class="confirm__password input" name="confirm_password" type="password" placeholder=" ">
       </legend>
       <legend class="form__btn__container">
         <button class="signup__button auth__button">Create your amasoon account <span class="loader hidden">
@@ -56,10 +56,64 @@ require_once(__DIR__ . '/components/top.php');
   async function signup() {
     const loader = dqs('.loader ');
     const btn = dqs('.signup__button');
+    const form = event.target.form
+    const infoElement = dqs('.auth__form__error');
+    
+    //**validation */
+
+    //username
+    if (form.user_name.value.trim().length < _USERNAME_MIN_LEN) {
+      return infoElement.textContent = `Name must be at least ${_USERNAME_MIN_LEN} characters long`
+    }
+
+    if (form.user_name.value.trim().length > _USERNAME_MAX_LEN) {
+      return infoElement.textContent = `Name cannot be more than ${_USERNAME_MAX_LEN} characters long`
+    }
+
+    if (containsNumber(form.user_name.value.trim())) {
+      return infoElement.textContent = `Name cannot contain numbers`
+    }
+
+    //email
+    if (!form.user_email.value.trim().length) {
+      return infoElement.textContent = `Email required`
+    }
+
+    if (!validateEmail(form.user_email.value.trim())) {
+      return infoElement.textContent = `Email is invalid`
+    }
+
+    //phone number
+    if (!form.user_phone_number.value.trim().length) {
+      return infoElement.textContent = `Phone number required`
+    }
+
+    if (form.user_phone_number.value.trim().length < _PHONE_LEN || form.user_phone_number.value.trim().length > _PHONE_LEN) {
+      return infoElement.textContent = `Phone number must be ${_PHONE_LEN} characters long`
+    }
+
+    if (containsString(form.user_phone_number.value.trim())) {
+      return infoElement.textContent = 'Phone number must contain only numbers';
+    }
+
+    //password
+    if (!form.user_password.value.trim().length || !form.confirm_password.value.trim().length) {
+      return infoElement.textContent = "Password fields required!"
+    }
+
+    if (form.user_password.value.trim() != form.confirm_password.value.trim()) {
+      return infoElement.textContent = "Passwords do not match!"
+    }
+
+    if (form.user_password.value.trim().length < _PASSWORD_MIN_LEN) {
+      return infoElement.textContent = `Password has be at least ${_PASSWORD_MIN_LEN} characters long`
+    }
+    if (form.user_password.value.trim().length > _PASSWORD_MAX_LEN) {
+      return infoElement.textContent = `Password cannot be more that ${_PASSWORD_MAX_LEN} characters`
+    }
+
     loader.classList.remove("hidden");
     btn.disabled = true;
-    const form = event.target.form
-
     try {
       const request = await fetch("api/api-signup", {
         method: "POST",
@@ -67,7 +121,7 @@ require_once(__DIR__ . '/components/top.php');
       })
 
       const response = await request.json();
-      dqs('.auth__form__error').textContent = response?.info;
+      infoElement.textContent = response?.info;
       if (request.ok) {
         location.href = "index";
       }
