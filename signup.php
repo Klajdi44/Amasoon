@@ -58,59 +58,14 @@ require_once(__DIR__ . '/components/top.php');
     const btn = dqs('.signup__button');
     const form = event.target.form
     const infoElement = dqs('.auth__form__error');
-    
+
     //**validation */
+    const fieldsOK = _validateFields(form, infoElement);
 
-    //username
-    if (form.user_name.value.trim().length < _USERNAME_MIN_LEN) {
-      return infoElement.textContent = `Name must be at least ${_USERNAME_MIN_LEN} characters long`
-    }
-
-    if (form.user_name.value.trim().length > _USERNAME_MAX_LEN) {
-      return infoElement.textContent = `Name cannot be more than ${_USERNAME_MAX_LEN} characters long`
+    if (!fieldsOK) {
+      return
     }
 
-    if (containsNumber(form.user_name.value.trim())) {
-      return infoElement.textContent = `Name cannot contain numbers`
-    }
-
-    //email
-    if (!form.user_email.value.trim().length) {
-      return infoElement.textContent = `Email required`
-    }
-
-    if (!validateEmail(form.user_email.value.trim())) {
-      return infoElement.textContent = `Email is invalid`
-    }
-
-    //phone number
-    if (!form.user_phone_number.value.trim().length) {
-      return infoElement.textContent = `Phone number required`
-    }
-
-    if (form.user_phone_number.value.trim().length < _PHONE_LEN || form.user_phone_number.value.trim().length > _PHONE_LEN) {
-      return infoElement.textContent = `Phone number must be ${_PHONE_LEN} characters long`
-    }
-
-    if (containsString(form.user_phone_number.value.trim())) {
-      return infoElement.textContent = 'Phone number must contain only numbers';
-    }
-
-    //password
-    if (!form.user_password.value.trim().length || !form.confirm_password.value.trim().length) {
-      return infoElement.textContent = "Password fields required!"
-    }
-
-    if (form.user_password.value.trim() != form.confirm_password.value.trim()) {
-      return infoElement.textContent = "Passwords do not match!"
-    }
-
-    if (form.user_password.value.trim().length < _PASSWORD_MIN_LEN) {
-      return infoElement.textContent = `Password has be at least ${_PASSWORD_MIN_LEN} characters long`
-    }
-    if (form.user_password.value.trim().length > _PASSWORD_MAX_LEN) {
-      return infoElement.textContent = `Password cannot be more that ${_PASSWORD_MAX_LEN} characters`
-    }
 
     loader.classList.remove("hidden");
     btn.disabled = true;
