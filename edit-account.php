@@ -40,7 +40,9 @@ if (!_is_user_signed_in()) {
 					<strong>Password</strong>
 					<p>******</p>
 				</article>
-				<button class="secondary-button edit__account__edit__btn">Edit</button>
+				<a href="./edit-password.php">
+					<input type='button' class="secondary-button edit__account__edit__btn" value="Edit">
+				</a>
 			</section>
 		</div>
 	</div>
