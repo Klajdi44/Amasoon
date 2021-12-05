@@ -11,12 +11,12 @@ $_title = 'Edit your current password';
 ?>
 
 <script type="module">
-	dqs('.new__password__btn').onclick = editPassword;
+	_dqs('.new__password__btn').onclick = editPassword;
 
 	async function editPassword() {
-		const infoElement = dqs('.new__password__info');
-		const password = dqs('.user_password');
-		const confirmPassword = dqs('.confirm_user_password');
+		const infoElement = _dqs('.new__password__info');
+		const password = _dqs('.user_password');
+		const confirmPassword = _dqs('.confirm_user_password');
 		const formData = new FormData(event.target.form);
 
 		if (!password.value.length || !confirmPassword.value.length) {

@@ -50,12 +50,12 @@ if (!_is_user_signed_in()) {
 
 
 <script type="module">
-	const form = dqs('form');
-	const user_name = dqs('#user_name')
-	const user_phone_number = dqs('#user_phone_number')
-	const user_email = dqs('#user_email');
-	const saveBtn = dqs('.edit__account__save__btn');
-	dqs('.input', true).forEach(input => input.oninput = enableSave);
+	const form = _dqs('form');
+	const user_name = _dqs('#user_name')
+	const user_phone_number = _dqs('#user_phone_number')
+	const user_email = _dqs('#user_email');
+	const saveBtn = _dqs('.edit__account__save__btn');
+	_dqs('.input', true).forEach(input => input.oninput = enableSave);
 	saveBtn.onclick = editAccountInfo;
 
 	function enableSave() {
@@ -73,7 +73,7 @@ if (!_is_user_signed_in()) {
 				body: formData
 			});
 			const response = await request.json();
-			const error = dqs('.error');
+			const error = _dqs('.error');
 			error.textContent = response?.info;
 			if (request.ok) {
 				error.id = 'success';

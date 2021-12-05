@@ -52,12 +52,12 @@ require_once(__DIR__ . '/components/top.php');
 </div>
 
 <script type='module'>
-  dqs('.signup__button').onclick = signup;
+  _dqs('.signup__button').onclick = signup;
   async function signup() {
-    const loader = dqs('.loader ');
-    const btn = dqs('.signup__button');
+    const loader = _dqs('.loader ');
+    const btn = _dqs('.signup__button');
     const form = event.target.form
-    const infoElement = dqs('.auth__form__error');
+    const infoElement = _dqs('.auth__form__error');
 
     //**validation */
     const {
@@ -67,7 +67,7 @@ require_once(__DIR__ . '/components/top.php');
     } = _validateFields(form);
 
     if (!fieldOk) {
-      focus(element);
+      _focus(element);
       return infoElement.textContent = info;
     }
 
