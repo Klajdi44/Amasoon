@@ -60,10 +60,15 @@ require_once(__DIR__ . '/components/top.php');
     const infoElement = dqs('.auth__form__error');
 
     //**validation */
-    const fieldsOK = _validateFields(form, infoElement);
+    const {
+      fieldOk,
+      info,
+      element
+    } = _validateFields(form);
 
-    if (!fieldsOK) {
-      return
+    if (!fieldOk) {
+      focus(element);
+      return infoElement.textContent = info;
     }
 
 
