@@ -35,9 +35,9 @@ require_once(__DIR__ . '/components/top.php');
         <input id="user_password" class="user_password input" name="user_password" type="password" placeholder=" ">
       </legend>
       <legend>
-        <label for="confirm_password">Confirm password</label>
+        <label for="confirm_user_password">Confirm password</label>
         <small>Must match password above</small>
-        <input id="confirm_password" class="confirm__password input" name="confirm_password" type="password" placeholder=" ">
+        <input id="confirm_user_password" class="confirm_user_password input" name="confirm_user_password" type="password" placeholder=" ">
       </legend>
       <legend class="form__btn__container">
         <button class="signup__button auth__button">Create your amasoon account <span class="loader hidden">

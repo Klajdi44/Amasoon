@@ -142,15 +142,18 @@ function _validatePassword(form, skipConfirmPass = false) {
   }
 
   if (!skipConfirmPass) {
-    if (!form.confirm_password.value.trim().length) {
+    if (!form.confirm_user_password.value.trim().length) {
       return {
         fieldOk: false,
         info: "Confirm password field required!",
-        element: form.confirm_password,
+        element: form.confirm_user_password,
       };
     }
 
-    if (form.user_password.value.trim() != form.confirm_password.value.trim()) {
+    if (
+      form.user_password.value.trim() !=
+      form.confirm_user_password.value.trim()
+    ) {
       return {
         fieldOk: false,
         info: "Passwords do not match!",
