@@ -18,7 +18,7 @@ small {
   border-radius: var(--border-radius);
 
   &:focus {
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--success-color);
     outline: 3px solid var(--color--accent);
   }
 }
