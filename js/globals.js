@@ -151,8 +151,7 @@ function _validatePassword(form, skipConfirmPass = false) {
     }
 
     if (
-      form.user_password.value.trim() !=
-      form.confirm_user_password.value.trim()
+      form.user_password.value.trim() != form.confirm_user_password.value.trim()
     ) {
       return {
         fieldOk: false,
@@ -187,43 +186,23 @@ function _validatePassword(form, skipConfirmPass = false) {
 function _validateFields(form, skipPassword = false) {
   //username
   if (!_validateName(form).fieldOk) {
-    const { fieldOk, info, element } = _validateName(form);
-    return {
-      fieldOk,
-      info,
-      element,
-    };
+    return _validateName(form);
   }
 
   //email
   if (!_validateEmail(form).fieldOk) {
-    const { fieldOk, info, element } = _validateEmail(form);
-    return {
-      fieldOk,
-      info,
-      element,
-    };
+    return _validateEmail(form);
   }
 
   //phone number
   if (!_validatePhone(form).fieldOk) {
-    const { fieldOk, info, element } = _validatePhone(form);
-    return {
-      fieldOk,
-      info,
-      element,
-    };
+    return _validatePhone(form);
   }
 
   //password
   if (!skipPassword) {
     if (!_validatePassword(form).fieldOk) {
-      const { fieldOk, info, element } = _validatePassword(form);
-      return {
-        fieldOk,
-        info,
-        element,
-      };
+      return _validatePassword(form);
     }
   }
 
