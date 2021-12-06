@@ -50,22 +50,32 @@ if (!_is_user_signed_in()) {
 
 
 <script type="module">
+	const infoElement = _dqs('.error');
 	const form = _dqs('form');
-	const user_name = _dqs('#user_name')
-	const user_phone_number = _dqs('#user_phone_number')
-	const user_email = _dqs('#user_email');
 	const saveBtn = _dqs('.edit__account__save__btn');
 	_dqs('.input', true).forEach(input => input.oninput = enableSave);
 	saveBtn.onclick = editAccountInfo;
 
 	function enableSave() {
-		if (user_name.value.trim() !== '<?= $_SESSION['user_name'] ?>' || user_phone_number.value.trim() !== '<?= $_SESSION['user_phone_number'] ?>' || user_email.value.trim() !== '<?= $_SESSION['user_email'] ?>') {
+		if (form.user_name.value.trim() !== '<?= $_SESSION['user_name'] ?>' || form.user_phone_number.value.trim() !== '<?= $_SESSION['user_phone_number'] ?>' || form.user_email.value.trim() !== '<?= $_SESSION['user_email'] ?>') {
 			return saveBtn.removeAttribute('disabled');
 		}
 		saveBtn.setAttribute('disabled', '');
 	}
+
 	async function editAccountInfo() {
 		const formData = new FormData(event.target.form);
+
+		const {
+			fieldOk,
+			info,
+			element
+		} = _validateFields(form, true);
+
+		if (!fieldOk) {
+			_focus(element);
+			return infoElement.textContent = info;
+		}
 
 		try {
 			const request = await fetch('./api/api_edit_account', {
@@ -73,10 +83,9 @@ if (!_is_user_signed_in()) {
 				body: formData
 			});
 			const response = await request.json();
-			const error = _dqs('.error');
-			error.textContent = response?.info;
+			infoElement.textContent = response?.info;
 			if (request.ok) {
-				error.id = 'success';
+				infoElement.id = 'success';
 				setTimeout(() => {
 					window.location.reload();
 				}, 1000);
