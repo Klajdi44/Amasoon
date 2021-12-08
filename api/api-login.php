@@ -1,9 +1,22 @@
 <?php
 require_once(__DIR__ . '/../private/globals.php');
 
-// Validate
-if (!isset($_POST['user_email']) || strlen($_POST['user_email']) <= 0) _res(400, ['info' => 'email required', 'error' => __LINE__]);
-if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) _res(400, ['info' => 'Email is invalid', 'error' => __LINE__]);
+//* Validation**
+
+// email & phonenumber
+if (!isset($_POST['user_email']) && !isset($_POST['user_phone_number'])) _res(400, ['info' => 'Email or Phone number required']);
+
+
+//email
+if (isset($_POST['user_email'])) {
+  if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) _res(400, ['info' => 'Email is invalid', 'error' => __LINE__]);
+}
+
+//phone number
+if (isset($_POST['user_phone_number'])) {
+  if (strlen($_POST['user_phone_number']) < _PHONE_LEN || strlen($_POST['user_phone_number']) > _PHONE_LEN) _res(400, ['info' => 'Phone number must be ' . _PHONE_LEN . ' characters long', 'error' => __LINE__]);
+  if (!ctype_digit($_POST['user_phone_number'])) _res(400, ['info' => 'Phone number must contain only numbers', 'error' => __LINE__]);
+}
 
 
 // Validate the password
@@ -13,15 +26,16 @@ if (strlen($_POST['user_password']) > _PASSWORD_MAX_LEN) _res(400, ['info' => 'P
 
 $db = _db();
 
-// check if email exists
+// check if email or phone number exists
 try {
-  $query = $db->prepare('SELECT * FROM users WHERE user_email = :user_email');
+  $query = $db->prepare('SELECT * FROM users WHERE user_email = :user_email OR user_phone_number = :user_phone_number');
   $query->bindValue(':user_email', $_POST['user_email']);
+  $query->bindValue(':user_phone_number', $_POST['user_phone_number']);
   $query->execute();
   $row = $query->fetch();
 
   if (!$row) {
-    _res(400, ['info' => 'Email does not exist', 'error' => __LINE__]);
+    _res(400, ['info' => 'Email or Phone number does not exist', 'error' => __LINE__]);
   }
 
   //verify password

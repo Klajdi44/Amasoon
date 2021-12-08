@@ -36,7 +36,7 @@ function containsNumber(text) {
 function _focus(element) {
   element.focus();
 }
-function testEmail(email) {
+function _testEmail(email) {
   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) return true;
   else return false;
 }
@@ -82,7 +82,7 @@ function _validateEmail(form) {
     };
   }
 
-  if (!testEmail(form.user_email.value.trim())) {
+  if (!_testEmail(form.user_email.value.trim())) {
     return {
       fieldOk: false,
       info: "Email is invalid",
