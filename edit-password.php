@@ -11,31 +11,25 @@ $_title = 'Edit your current password';
 ?>
 
 <script type="module">
-	dqs('.new__password__btn').onclick = editPassword;
+	_dqs('.new__password__btn').onclick = editPassword;
 
 	async function editPassword() {
-		const infoElement = dqs('.new__password__info');
-		const password = dqs('.user_password');
-		const confirmPassword = dqs('.confirm_user_password');
-		const formData = new FormData(event.target.form);
+		const infoElement = _dqs('.new__password__info');
+		const password = _dqs('.user_password');
+		const confirmPassword = _dqs('.confirm_user_password');
+		const form = event.target.form;
+		const formData = new FormData(form);
 
-		if (!password.value.length || !confirmPassword.value.length) {
-			return infoElement.textContent = "Fields cannot be empty!"
-		}
+		const {
+			fieldOk,
+			info,
+			element
+		} = _validatePassword(form);
 
-		if (password.value != confirmPassword.value) {
-			return infoElement.textContent = "Passwords do not match!"
-		}
 
-		if (password.value.length < _PASSWORD_MIN_LEN) {
-			return infoElement.textContent = "Password has be at least 8 characters long"
-		}
-		if (password.value.length > _PASSWORD_MAX_LEN) {
-			return infoElement.textContent = "Password cannot be more that 16 characters"
-		}
-
-		if (password.value != confirmPassword.value) {
-			return infoElement.textContent = "Passwords do not match!"
+		if (!fieldOk) {
+			_focus(element);
+			return infoElement.textContent = info;
 		}
 
 		try {

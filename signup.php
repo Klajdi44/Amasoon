@@ -35,9 +35,9 @@ require_once(__DIR__ . '/components/top.php');
         <input id="user_password" class="user_password input" name="user_password" type="password" placeholder=" ">
       </legend>
       <legend>
-        <label for="re-enter_user_password">Confirm password</label>
+        <label for="confirm_user_password">Confirm password</label>
         <small>Must match password above</small>
-        <input id="re-enter_user_password" class="re-enter_user_password input" name="re-enter_user_password" type="password" placeholder=" ">
+        <input id="confirm_user_password" class="confirm_user_password input" name="confirm_user_password" type="password" placeholder=" ">
       </legend>
       <legend class="form__btn__container">
         <button class="signup__button auth__button">Create your amasoon account <span class="loader hidden">
@@ -52,22 +52,36 @@ require_once(__DIR__ . '/components/top.php');
 </div>
 
 <script type='module'>
-  dqs('.signup__button').onclick = signup;
+  _dqs('.signup__button').onclick = signup;
   async function signup() {
-    const loader = dqs('.loader ');
-    const btn = dqs('.signup__button');
+    const loader = _dqs('.loader ');
+    const btn = _dqs('.signup__button');
+    const form = event.target.form
+    const infoElement = _dqs('.auth__form__error');
+
+    //**validation */
+    const {
+      fieldOk,
+      info,
+      element
+    } = _validateFields(form);
+
+    if (!fieldOk) {
+      _focus(element);
+      return infoElement.textContent = info;
+    }
+
+
     loader.classList.remove("hidden");
     btn.disabled = true;
-    const form = event.target.form
-
     try {
-      const request = await fetch("api/api-signup", {
+      const request = await fetch("api/api_signup", {
         method: "POST",
         body: new FormData(form)
       })
 
       const response = await request.json();
-      dqs('.auth__form__error').textContent = response?.info;
+      infoElement.textContent = response?.info;
       if (request.ok) {
         location.href = "index";
       }
