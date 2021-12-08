@@ -32,7 +32,7 @@ if ($_SESSION['is_verified']) {
 		formData.append('key', key);
 
 		try {
-			const request = await fetch('api/api-verify-email.php', {
+			const request = await fetch('api/api_verify_email.php', {
 				method: "POST",
 				body: formData
 			});

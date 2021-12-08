@@ -75,7 +75,7 @@ require_once(__DIR__ . '/components/top.php');
     loader.classList.remove("hidden");
     btn.disabled = true;
     try {
-      const request = await fetch("api/api-signup", {
+      const request = await fetch("api/api_signup", {
         method: "POST",
         body: new FormData(form)
       })

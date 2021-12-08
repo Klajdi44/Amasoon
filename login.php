@@ -80,7 +80,7 @@ require_once(__DIR__ . '/components/top.php');
 
     formData.append('user_password', form.user_password.value);
     try {
-      let conn = await fetch("api/api-login", {
+      let conn = await fetch("api/api_login", {
         method: "POST",
         body: formData
       })

@@ -45,7 +45,7 @@ include_once(__DIR__ . '/components/top.php');
 
 		loader.classList.remove("hidden");
 		try {
-			const request = await fetch('api/api-forgot-password.php', {
+			const request = await fetch('api/api_forgot_password.php', {
 				method: "POST",
 				body: formdata
 			});
