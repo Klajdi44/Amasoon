@@ -36,6 +36,12 @@ function _is_user_signed_in()
   }
   exit();
 }
+function _handle_loggedin_status($path='index')
+{
+  if (!_is_user_signed_in()) {
+    header("Location: $path");
+  }
+}
 
 function  _contains_number($string)
 {
