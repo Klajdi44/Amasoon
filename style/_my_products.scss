@@ -1,0 +1,28 @@
+.my__products__container {
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.my__products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.my__product__item {
+  max-width: 320px;
+}
+.my__product__item > a {
+  text-decoration: none !important;
+  color: unset;
+}
+
+.my__product__img {
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.my__product__title {
+  font-size: 1em;
+  font-weight: 400;
+}
