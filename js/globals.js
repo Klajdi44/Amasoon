@@ -43,7 +43,6 @@ function _testEmail(email) {
 
 function _renderProducts(products, outputElement, isPartner = false) {
   products.forEach(product => {
-    console.log(product);
     const bluePrint = `
 <article class="product__item"> 
 <a href='./edit-account.php?id=${product.id}' >
@@ -58,6 +57,21 @@ function _renderProducts(products, outputElement, isPartner = false) {
 </div>
 </a>
 </article>
+`;
+    outputElement.insertAdjacentHTML("beforeend", bluePrint);
+  });
+}
+
+function _renderCategories(categories, outputElement, selectAll = false) {
+  categories.forEach(categories => {
+    const bluePrint = `
+    <section class="category__container">
+		<article class="category">
+			<a href="">
+				<h2>${categories.category}</h2>
+				<img class="category__image" src="./assets/${categories.category}.png" alt="Electronics">
+			</a>
+		</article>
 `;
     outputElement.insertAdjacentHTML("beforeend", bluePrint);
   });

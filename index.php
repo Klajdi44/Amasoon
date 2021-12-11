@@ -28,24 +28,61 @@ require_once(__DIR__ . '/components/top.php');
 	</section>
 </main>
 <script type="module">
-	async function generateShops() {
-		const outputElement = _dqs('.my__products');
-		if (localStorage.shopProducts) {
-			return _renderProducts(JSON.parse(localStorage.shopProducts), outputElement, true)
+	const apiInfo = [{
+		path: './bridges/generator.php',
+		outputElement: _dqs('.my__products'),
+		localStorageName: 'shopProducts',
+		renderFunc: _renderProducts
+	}, {
+		path: './api/api_test.php',
+		outputElement: _dqs('.category__container'),
+		localStorageName: 'categories',
+		renderFunc: _renderCategories
+	}]
+
+	Promise.all(apiInfo.map(api => handleApiCall(api.path, api.outputElement, api.localStorageName, api.renderFunc)))
+
+	async function handleApiCall(url, outputElement, localstorageName, renderFunc) {
+		const date = Date.now();
+
+		if (localStorage[localstorageName] && JSON.parse(localStorage[localstorageName])?.ttl > date) {
+			return renderFunc(JSON.parse(localStorage[localstorageName])?.data, outputElement, true)
 		}
+
 		try {
-			const request = await fetch('./bridges/generator.php');
+			const request = await fetch(url);
 			const response = await request.json();
 
 			if (request.ok) {
-				localStorage.shopProducts = JSON.stringify(response);
-				_renderProducts(JSON.parse(localStorage.shopProducts), outputElement, true)
+				const localStorageData = {
+					data: response,
+					//30 min
+					ttl: date + 30 * 6000
+				}
+
+				localStorage[localstorageName] = JSON.stringify(localStorageData);
+				renderFunc(response, outputElement, true)
 			}
 		} catch (error) {
 			console.error(error.message);
 		}
 	}
-	generateShops();
+
+	// function setWith(ttl) {
+	// 	console.log('hello');
+	// 	const date = Date.now();
+	// 	console.log(!!localStorage.shop && JSON.parse(localStorage.shop).ttl > date);
+	// 	if (localStorage.shop && JSON.parse(localStorage.shop).ttl > date) {
+	// 		return console.log('render');
+	// 	}
+	// 	alert('clear')
+
+	// 	localStorage.shop = JSON.stringify({
+	// 		items: [1, 2],
+	// 		ttl: date + ttl
+	// 	})
+	// }
+	// setWith(5000);
 </script>
 
 <?php require_once('./components/bottom.php'); ?>
