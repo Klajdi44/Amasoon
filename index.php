@@ -1,5 +1,7 @@
 <?php
+$_documentTitle = "Home";
 $_show_nav = true;
+$_className = 'index__body';
 require_once(__DIR__ . '/components/top.php');
 // $shopProducts = json_decode(file_get_contents(__DIR__ . '/partner-shops/shop.txt'), true);
 ?>
@@ -10,13 +12,21 @@ require_once(__DIR__ . '/components/top.php');
 </article>";
 			}
 			?> -->
+<main class="homepage__main">
+	<section class="category__container">
+		<article class="category">
+			<a href="">
+				<h2>Electronics</h2>
+				<img class="category__image" src="./assets/electronics.png" alt="Electronics">
+			</a>
+		</article>
+	</section>
 
 
-<section class="products__container">
-	<article class="my__products"></article>
-
-</section>
-
+	<section class="products__container">
+		<article class="my__products"></article>
+	</section>
+</main>
 <script type="module">
 	async function generateShops() {
 		const outputElement = _dqs('.my__products');

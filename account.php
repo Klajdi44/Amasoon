@@ -3,6 +3,7 @@
 _handle_loggedin_status();
 $_show_nav = true;
 $_documentTitle = 'Account';
+$
 @require_once(__DIR__ . '/components/top.php');
 ?>
 
