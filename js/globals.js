@@ -41,6 +41,28 @@ function _testEmail(email) {
   else return false;
 }
 
+function _renderProducts(products, outputElement, isPartner = false) {
+  products.forEach(product => {
+    console.log(product);
+    const bluePrint = `
+<article class="product__item"> 
+<a href='./edit-account.php?id=${product.id}' >
+<img class='product__img' src=${
+      isPartner
+        ? `https://coderspage.com/2021-F-Web-Dev-Images/${product.image}`
+        : `./assets/${product.image}.jpeg`
+    } alt="product">
+<div class="product__body">
+  <h2 class="product__title">${product.title}</h2>
+  <h3 class="product__price">Kr.${product.price}</h3>
+</div>
+</a>
+</article>
+`;
+    outputElement.insertAdjacentHTML("beforeend", bluePrint);
+  });
+}
+
 function _validateName(form, infoElement) {
   if (form.user_name.value.trim().length < _USERNAME_MIN_LEN) {
     return {
