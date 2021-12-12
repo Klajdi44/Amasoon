@@ -1,6 +1,8 @@
 <?php
 define('_USERNAME_MIN_LEN', 1);
 define('_USERNAME_MAX_LEN', 50);
+define('_USERLASTNAME_MIN_LEN', 1);
+define('_USERLASTNAME_MAX_LEN', 50);
 define('_PASSWORD_MIN_LEN', 8);
 define('_PASSWORD_MAX_LEN', 20);
 define('_PHONE_LEN', 8);

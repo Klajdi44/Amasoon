@@ -1,5 +1,7 @@
 const _USERNAME_MIN_LEN = 1;
 const _USERNAME_MAX_LEN = 50;
+const _USER_LAST_NAME_MIN_LEN = 1;
+const _USER_LAST_NAME_MAX_LEN = 50;
 const _PASSWORD_MIN_LEN = 8;
 const _PASSWORD_MAX_LEN = 20;
 const _PHONE_LEN = 8;
@@ -100,7 +102,7 @@ function _renderProductOverview(
   outputElement.insertAdjacentHTML("beforeend", bluePrint);
 }
 
-function _validateName(form, infoElement) {
+function _validateName(form) {
   if (form.user_name.value.trim().length < _USERNAME_MIN_LEN) {
     return {
       fieldOk: false,
@@ -123,6 +125,38 @@ function _validateName(form, infoElement) {
       fieldOk: false,
       info: "Name cannot contain numbers",
       element: form.user_name,
+    };
+  }
+  return {
+    fieldOk: true,
+    info: "",
+    element: "",
+  };
+}
+
+function _validateLastName(form) {
+  if (form.user_last_name.value.trim().length < _USER_LAST_NAME_MIN_LEN) {
+    return {
+      fieldOk: false,
+      info: `Last name must be at least ${_USER_LAST_NAME_MIN_LEN} characters long`,
+      element: form.user_last_name,
+    };
+  }
+
+  if (form.user_last_name.value.trim().length > _USER_LAST_NAME_MAX_LEN) {
+    focus(form.user_last_name);
+    return {
+      fieldOk: false,
+      info: `Last name cannot be more than ${_USER_LAST_NAME_MAX_LEN} characters long`,
+      element: form.user_last_name,
+    };
+  }
+
+  if (containsNumber(form.user_last_name.value.trim())) {
+    return {
+      fieldOk: false,
+      info: "Last name cannot contain numbers",
+      element: form.user_last_name,
     };
   }
   return {
@@ -243,9 +277,13 @@ function _validatePassword(form, skipConfirmPass = false) {
 }
 
 function _validateFields(form, skipPassword = false) {
-  //username
+  //user name
   if (!_validateName(form).fieldOk) {
     return _validateName(form);
+  }
+  //user last name
+  if (!_validateLastName(form).fieldOk) {
+    return _validateLastName(form);
   }
 
   //email

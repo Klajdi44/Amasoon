@@ -1,11 +1,18 @@
 <?php
 require_once(__DIR__ . '/../private/globals.php');
 
-// Validate
+//** Validation* 
+//name
 if (!isset($_POST['user_name'])) _res(400, ['info' => 'Name required', 'error' => __LINE__]);
 if (strlen($_POST['user_name']) < _USERNAME_MIN_LEN) _res(400, ['info' => 'Name must be at least ' . _USERNAME_MIN_LEN . ' characters long', 'error' => __LINE__]);
 if (strlen($_POST['user_name']) > _USERNAME_MAX_LEN) _res(400, ['info' => 'Name cannot be more than' . _USERNAME_MAX_LEN . ' characters long', 'error' => __LINE__]);
 if (_contains_number($_POST['user_name'])) _res(400, ['info' => 'Name cannot contain numbers', 'error' => __LINE__]);
+
+//name
+if (!isset($_POST['user_last_name'])) _res(400, ['info' => 'Last name required', 'error' => __LINE__]);
+if (strlen($_POST['user_last_name']) < _USERLASTNAME_MIN_LEN) _res(400, ['info' => 'Last name must be at least ' . _USERLASTNAME_MIN_LEN . ' characters long', 'error' => __LINE__]);
+if (strlen($_POST['user_last_name']) > _USERLASTNAME_MAX_LEN) _res(400, ['info' => 'Last name cannot be more than' . _USERLASTNAME_MAX_LEN . ' characters long', 'error' => __LINE__]);
+if (_contains_number($_POST['user_last_name'])) _res(400, ['info' => 'Last name cannot contain numbers', 'error' => __LINE__]);
 
 //validate email
 if (!isset($_POST['user_email'])) _res(400, ['info' => 'email required', 'error' => __LINE__]);
@@ -44,9 +51,10 @@ try {
   $verification_key = bin2hex(random_bytes(16));
   $forgot_password_key = bin2hex(random_bytes(16));
 
-  $query = $db->prepare('INSERT INTO users(user_id,user_name,user_email,user_phone_number,user_password,user_verification_key,forgot_password_key) VALUES(:user_id,:user_name,:user_email,:user_phone_number, :user_password,:user_verification_key,:forgot_password_key)');
+  $query = $db->prepare('INSERT INTO users(user_id,user_name,user_last_name,user_email,user_phone_number,user_password,user_verification_key,forgot_password_key) VALUES(:user_id,:user_name,:user_last_name,:user_email,:user_phone_number, :user_password,:user_verification_key,:forgot_password_key)');
   $query->bindValue(':user_id', null);
   $query->bindValue(':user_name', $_POST['user_name']);
+  $query->bindValue(':user_last_name', $_POST['user_last_name']);
   $query->bindValue(':user_email', $_POST['user_email']);
   $query->bindValue(':user_phone_number', $_POST['user_phone_number']);
   $query->bindValue(':user_password', $password_hash);

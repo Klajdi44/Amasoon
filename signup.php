@@ -16,8 +16,13 @@ require_once(__DIR__ . '/components/top.php');
       <p class="auth__form__error error"></p>
       <legend>
         <label for="user_name">Your name</label>
-        <small>e.g John Doe</small>
+        <small>e.g John</small>
         <input id="user_name" class="user_name input" name="user_name" type="text" placeholder=" ">
+      </legend>
+      <legend>
+        <label for="user_last_name">Your last name</label>
+        <small>e.g Doe</small>
+        <input id="user_last_name" class="user_last_name input" name="user_last_name" type="text" placeholder=" ">
       </legend>
       <legend>
         <label for="user_email">Email</label>
