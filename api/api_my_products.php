@@ -19,7 +19,7 @@ try {
 	$row = $query->fetchAll();
 
 	if (!$row) {
-		_res(400, ['info' => 'Failed to get products', 'error' => __LINE__]);
+		_res(400, ['info' => 'No products found', 'error' => __LINE__]);
 	}
 
 	_res(200, ['info' => $row]);

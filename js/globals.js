@@ -45,7 +45,7 @@ function _renderProducts(products, outputElement, isPartner = false) {
   products.forEach(product => {
     const bluePrint = `
 <article class="product__item"> 
-<a href='./edit-account.php?id=${product.id}' >
+<a href='./product-overview.php?id=${product.id}' >
 <img class='product__img' src=${
       isPartner
         ? `https://coderspage.com/2021-F-Web-Dev-Images/${product.image}`

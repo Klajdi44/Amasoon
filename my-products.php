@@ -7,7 +7,7 @@ $_documentTitle = 'MY Products';
 ?>
 
 <main class='products__container'>
-	<p>My products: <span class="my__products__length">0</span> </p>
+	<p class="my__products__length__container">My products: <span class="my__products__length">0</span> </p>
 	<section class='my__products'>
 
 

@@ -1,0 +1,41 @@
+@import "./mixins";
+
+.product__overview__container {
+  min-height: 100vh;
+  max-width: 1300px;
+  margin: auto;
+}
+
+.product__overview__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product__overview {
+  margin-top: 2em;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2em;
+  @include mediaQuery(tablet) {
+    justify-content: space-around;
+    flex-direction: row;
+  }
+
+  &__img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+
+    @include mediaQuery(tablet) {
+      width: 300px;
+      height: 300px;
+    }
+    @include mediaQuery(laptop) {
+      width: 600px;
+      height: 600px;
+    }
+  }
+}

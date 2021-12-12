@@ -1,12 +1,16 @@
 .products__container {
   min-height: 100vh;
-  padding: 1rem;
+  padding: 1em;
 }
 
 .my__products {
+  margin-top: 2em;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
+}
+.products__length__container {
+  margin-top: 1em;
 }
 
 .product__item {
