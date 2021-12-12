@@ -17,4 +17,4 @@ for ($i = 1; $i < count($lines); $i++) {
 }
 file_put_contents(__DIR__ . "/../partner-shops/shop.txt", json_encode($out));
 header('Content-Type: application/json');
-echo json_encode($out);
+echo json_encode(["info" => $out]);

@@ -14,9 +14,9 @@ require_once(__DIR__ . '/components/top.php');
 			?> -->
 <main class="homepage__main">
 	<section class="category__container">
-		<article class="category">
-			<a href="">
-				<h2>Electronics</h2>
+		<article id="category__all" class="category">
+			<a href='./products.php'>
+				<h2>View all</h2>
 				<img class="category__image" src="./assets/electronics.png" alt="Electronics">
 			</a>
 		</article>
@@ -27,30 +27,39 @@ require_once(__DIR__ . '/components/top.php');
 		<article class="my__products"></article>
 	</section>
 </main>
+
 <script type="module">
 	const apiInfo = [{
 		path: './bridges/generator.php',
 		outputElement: _dqs('.my__products'),
 		localStorageName: 'shopProducts',
-		renderFunc: _renderProducts
+		renderFunc: _renderProducts,
+		isCategory: false
 	}, {
-		path: './api/api_test.php',
+		path: './api/api_categories.php',
 		outputElement: _dqs('.category__container'),
 		localStorageName: 'categories',
-		renderFunc: _renderCategories
+		renderFunc: _renderCategories,
+		isCategory: true
 	}]
 
-	Promise.all(apiInfo.map(api => handleApiCall(api.path, api.outputElement, api.localStorageName, api.renderFunc)))
+	Promise.all(apiInfo.map(api => handleApiCall(api)))
 
-	async function handleApiCall(url, outputElement, localstorageName, renderFunc) {
+	async function handleApiCall({
+		path,
+		outputElement,
+		localStorageName,
+		renderFunc,
+		isCategory
+	}) {
 		const date = Date.now();
 
-		if (localStorage[localstorageName] && JSON.parse(localStorage[localstorageName])?.ttl > date) {
-			return renderFunc(JSON.parse(localStorage[localstorageName])?.data, outputElement, true)
+		if (localStorage[localStorageName] && JSON.parse(localStorage[localStorageName])?.ttl > date) {
+			return renderFunc.apply(null, isCategory ? [JSON.parse(localStorage[localStorageName]).data.info, outputElement] : [JSON.parse(localStorage[localStorageName]).data.info, outputElement, true])
 		}
 
 		try {
-			const request = await fetch(url);
+			const request = await fetch(path);
 			const response = await request.json();
 
 			if (request.ok) {
@@ -60,29 +69,16 @@ require_once(__DIR__ . '/components/top.php');
 					ttl: date + 30 * 6000
 				}
 
-				localStorage[localstorageName] = JSON.stringify(localStorageData);
-				renderFunc(response, outputElement, true)
+				localStorage[localStorageName] = JSON.stringify(localStorageData);
+				
+				renderFunc.apply(null,
+					isCategory ? [response.info, outputElement] : [response.info, outputElement, true]
+				)
 			}
 		} catch (error) {
 			console.error(error.message);
 		}
 	}
-
-	// function setWith(ttl) {
-	// 	console.log('hello');
-	// 	const date = Date.now();
-	// 	console.log(!!localStorage.shop && JSON.parse(localStorage.shop).ttl > date);
-	// 	if (localStorage.shop && JSON.parse(localStorage.shop).ttl > date) {
-	// 		return console.log('render');
-	// 	}
-	// 	alert('clear')
-
-	// 	localStorage.shop = JSON.stringify({
-	// 		items: [1, 2],
-	// 		ttl: date + ttl
-	// 	})
-	// }
-	// setWith(5000);
 </script>
 
 <?php require_once('./components/bottom.php'); ?>

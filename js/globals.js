@@ -62,14 +62,14 @@ function _renderProducts(products, outputElement, isPartner = false) {
   });
 }
 
-function _renderCategories(categories, outputElement, selectAll = false) {
-  categories.forEach(categories => {
+function _renderCategories(categories, outputElement) {
+  categories.forEach(({ category }) => {
     const bluePrint = `
     <section class="category__container">
 		<article class="category">
-			<a href="">
-				<h2>${categories.category}</h2>
-				<img class="category__image" src="./assets/${categories.category}.png" alt="Electronics">
+			<a href=./products.php?category=${category}>
+				<h2>${category}</h2>
+				<img class="category__image" src="./assets/${category}.png" alt="Electronics">
 			</a>
 		</article>
 `;

@@ -12,16 +12,15 @@ $db = _db();
 // printf(uniqid('', true));
 
 
-// check if email or phone number exists
 try {
-	$query = $db->prepare('SELECT * FROM items WHERE item_owner_id = :user_id');
+	$query = $db->prepare('SELECT * FROM items WHERE owner_id = :user_id');
 	$query->bindValue(':user_id', $_POST['user_id']);
 	$query->execute();
 	$row = $query->fetchAll();
 
-	// if (!$row) {
-	// 	_res(400, ['info' => 'User id not found', 'error' => __LINE__]);
-	// }
+	if (!$row) {
+		_res(400, ['info' => 'Failed to get products', 'error' => __LINE__]);
+	}
 
 	_res(200, ['info' => $row]);
 } catch (Exception $ex) {
