@@ -41,13 +41,13 @@ function _testEmail(email) {
   else return false;
 }
 
-function _renderProducts(products, outputElement, isPartner = false) {
+function _renderProducts(products, outputElement, isPartnerProduct = false) {
   products.forEach(product => {
     const bluePrint = `
 <article class="product__item"> 
 <a href='./product-overview.php?id=${product.id}' >
 <img class='product__img' src=${
-      isPartner
+      isPartnerProduct
         ? `https://coderspage.com/2021-F-Web-Dev-Images/${product.image}`
         : `./assets/${product.image}.jpeg`
     } alt="product">
@@ -65,7 +65,6 @@ function _renderProducts(products, outputElement, isPartner = false) {
 function _renderCategories(categories, outputElement) {
   categories.forEach(({ category }) => {
     const bluePrint = `
-    <section class="category__container">
 		<article class="category">
 			<a href=./products.php?category=${category}>
 				<h2>${category}</h2>
@@ -75,6 +74,30 @@ function _renderCategories(categories, outputElement) {
 `;
     outputElement.insertAdjacentHTML("beforeend", bluePrint);
   });
+}
+
+function _renderProductOverview(
+  product,
+  outputElement,
+  isPartnerProduct = false
+) {
+  const bluePrint = `
+  <section class="product__overview">
+		<img class='product__overview__img'  src=${
+      isPartnerProduct
+        ? `https://coderspage.com/2021-F-Web-Dev-Images/${product.image}`
+        : `./assets/${product.image}.jpeg`
+    } alt="">
+		<article class="product__overview__content">
+			<div class="product__overview__body">
+				<h2 class="product__overview__title">${product.title}</h2>
+				<h3 class="product__overview__price">Kr.${product.price}</h3>
+			</div>
+			<p class="product__overview__description">${product.description}</p>
+		</article>
+	</section>`;
+
+  outputElement.insertAdjacentHTML("beforeend", bluePrint);
 }
 
 function _validateName(form, infoElement) {

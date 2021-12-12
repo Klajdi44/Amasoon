@@ -9,7 +9,7 @@ if (!_is_user_signed_in()) {
 
 ?>
 
-<main class='edit__account'>
+<main class='edit__account  page-width'>
 	<div class="edit__account__content__wrapper">
 		<h2 class="edit__account__title">Name, Number & Email</h2>
 		<p class="edit__account__error error"></p>

@@ -5,7 +5,7 @@ $_documentTitle = $_GET['category'] ?? 'Products';
 @require_once(__DIR__ . '/components/top.php');
 ?>
 
-<main class='products__container'>
+<main class='products__container  page-width'>
 	<p class="products__length__container">Total products: <span class="my__products__length">0</span> </p>
 	<section class='my__products'>
 

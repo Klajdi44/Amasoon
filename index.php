@@ -12,11 +12,11 @@ require_once(__DIR__ . '/components/top.php');
 </article>";
 			}
 			?> -->
-<main class="homepage__main">
+<main class="homepage__main page-width">
 	<section class="category__container">
 		<article id="category__all" class="category">
 			<a href='./products.php'>
-				<h2>View all</h2>
+				<h2>All Categories</h2>
 				<img class="category__image" src="./assets/electronics.png" alt="Electronics">
 			</a>
 		</article>
@@ -70,7 +70,7 @@ require_once(__DIR__ . '/components/top.php');
 				}
 
 				localStorage[localStorageName] = JSON.stringify(localStorageData);
-				
+
 				renderFunc.apply(null,
 					isCategory ? [response.info, outputElement] : [response.info, outputElement, true]
 				)

@@ -7,7 +7,8 @@
   margin-top: 2em;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  place-items: center;
+  gap: 25px;
 }
 .products__length__container {
   margin-top: 1em;

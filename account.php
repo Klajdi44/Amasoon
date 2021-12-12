@@ -8,7 +8,7 @@ $_documentTitle = 'Account';
 ?>
 
 
-<main class='account'>
+<main class='account  page-width'>
 
 	<h1 class="account__title">Your Account</h1>
 

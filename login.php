@@ -7,7 +7,7 @@ if (isset($_SESSION['user_id'])) {
 $_documentTitle = 'sign in';
 require_once(__DIR__ . '/components/top.php');
 ?>
-<div class="auth__container">
+<div class="auth__container  page-width">
   <?php require_once(__DIR__ . '/components/logo.php') ?>
   <div class="auth__wrapper">
     <form onsubmit="return false" class="auth__form">

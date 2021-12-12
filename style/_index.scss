@@ -1,15 +1,17 @@
+@import "./mixins";
+
 .index__body {
   // background: var(--color-background);
 }
 .homepage__main {
-  margin: 1em;
+  padding: 1em;
 }
 
 .category__container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-
+  place-items: center;
   .category {
     max-width: 300px;
     padding: 1em;

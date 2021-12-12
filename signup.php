@@ -8,7 +8,7 @@ $_documentTitle = 'Amasoon Registration';
 require_once(__DIR__ . '/components/top.php');
 ?>
 
-<div class="signup__container auth__container">
+<main class="signup__container auth__container  page-width">
   <?php require_once(__DIR__ . '/components/logo.php') ?>
   <div class="signup__wrapper auth__wrapper">
     <form onsubmit="return false" class="auth__form signup__form">
@@ -49,7 +49,7 @@ require_once(__DIR__ . '/components/top.php');
     </form>
 
   </div>
-</div>
+</main>
 
 <script type='module'>
   _dqs('.signup__button').onclick = signup;
