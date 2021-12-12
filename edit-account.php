@@ -18,6 +18,10 @@ if (!_is_user_signed_in()) {
 				<label for="user_name">Full name</label>
 				<input id="user_name" class="user_name input" name="user_name" type="text" placeholder=" " value="<?= $_SESSION['user_name'] ?>">
 			</legend>
+			<legend class="edit__account__field user_name">
+				<label for="user_last_name">Full name</label>
+				<input id="user_last_name" class="user_last_name input" name="user_last_name" type="text" placeholder=" " value="<?= $_SESSION['user_last_name'] ?>">
+			</legend>
 			<legend class="edit__account__field user_email">
 				<label for="user_email">Email</label>
 				<input id="user_email" class="user_email input" name="user_email" type="text" placeholder=" " value="<?= $_SESSION['user_email'] ?>">
@@ -57,7 +61,7 @@ if (!_is_user_signed_in()) {
 	saveBtn.onclick = editAccountInfo;
 
 	function enableSave() {
-		if (form.user_name.value.trim() !== '<?= $_SESSION['user_name'] ?>' || form.user_phone_number.value.trim() !== '<?= $_SESSION['user_phone_number'] ?>' || form.user_email.value.trim() !== '<?= $_SESSION['user_email'] ?>') {
+		if (form.user_name.value.trim() !== '<?= $_SESSION['user_name'] ?>' || form.user_last_name.value.trim() !== '<?= $_SESSION['user_last_name'] ?>' || form.user_phone_number.value.trim() !== '<?= $_SESSION['user_phone_number'] ?>' || form.user_email.value.trim() !== '<?= $_SESSION['user_email'] ?>') {
 			return saveBtn.removeAttribute('disabled');
 		}
 		saveBtn.setAttribute('disabled', '');
@@ -78,6 +82,7 @@ if (!_is_user_signed_in()) {
 		}
 
 		try {
+			formData.append('user_id', '<?= $_SESSION["user_id"] ?>');
 			const request = await fetch('./api/api_edit_account', {
 				method: 'POST',
 				body: formData
