@@ -66,7 +66,7 @@ require_once(__DIR__ . '/components/top.php');
 				const localStorageData = {
 					data: response,
 					//30 min
-					ttl: date + 30 * 6000
+					ttl: date + 30 * 60000
 				}
 
 				localStorage[localStorageName] = JSON.stringify(localStorageData);
