@@ -5,6 +5,9 @@ $_documentTitle = $_GET['category'] ?? 'Products';
 @require_once(__DIR__ . '/components/top.php');
 ?>
 <main class='product__overview__container page-width'>
+
+
+
 </main>
 
 <script type="module">
@@ -33,7 +36,7 @@ $_documentTitle = $_GET['category'] ?? 'Products';
 			const response = await request.json();
 			console.log(response);
 			if (request.ok) {
-				_renderProductOverview(response.info, productContainer);
+				_renderProductOverview(response.info, productContainer, false, '<?= $_SESSION["user_id"] ?>');
 			}
 		} catch (error) {
 			console.error(error?.message);

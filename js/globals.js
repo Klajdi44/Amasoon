@@ -85,7 +85,8 @@ function _renderCategories(categories, outputElement) {
 function _renderProductOverview(
   product,
   outputElement,
-  isPartnerProduct = false
+  isPartnerProduct = false,
+  user_id = ""
 ) {
   const bluePrint = `
   <section class="product__overview">
@@ -100,10 +101,16 @@ function _renderProductOverview(
 				<h3 class="product__overview__price">Kr.${product.price}</h3>
 			</div>
 			<p class="product__overview__description">${product.description}</p>
+      ${
+        user_id === product?.owner_id
+          ? `<button type="button" class="secondary-button product__overview__edit__btn"><a href=./edit-product.php?id=${product.id}>Edit</a></button>`
+          : ""
+      }
+     
 		</article>
 	</section>`;
 
-  outputElement.insertAdjacentHTML("beforeend", bluePrint);
+  outputElement.insertAdjacentHTML("afterbegin", bluePrint);
 }
 
 //** user field validation functions
