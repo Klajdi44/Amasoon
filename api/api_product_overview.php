@@ -22,6 +22,8 @@ try {
 		_res(400, ['info' => 'No products found', 'error' => __LINE__]);
 	}
 
+	session_start();
+	$_SESSION['last_product'] = $row;
 	_res(200, ['info' => $row]);
 } catch (Exception $ex) {
 	_res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);

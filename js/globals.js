@@ -435,7 +435,7 @@ function _validate_product_image(form) {
   };
 }
 
-function _validateProductFields(form) {
+function _validateProductFields(form, skipImage = false) {
   //title
   if (!_validate_product_title(form).fieldOk) {
     return _validate_product_title(form);
@@ -455,9 +455,11 @@ function _validateProductFields(form) {
     return _validate_product_price(form);
   }
 
-  //image
-  if (!_validate_product_image(form).fieldOk) {
-    return _validate_product_image(form);
+  if (!skipImage) {
+    //image
+    if (!_validate_product_image(form).fieldOk) {
+      return _validate_product_image(form);
+    }
   }
 
   return {

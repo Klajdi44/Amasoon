@@ -21,7 +21,7 @@ require_once(__DIR__ . '/components/top.php');
 			<legend>
 				<label for="upload__product__description">Description</label>
 				<small>At least 10 characters long</small>
-				<input id="upload__product__description" class="upload__product__description input" name="description" type="text" placeholder=" ">
+				<textarea id="upload__product__description" class="upload__product__description input" name="description" type="text" placeholder=" "> </textarea>
 			</legend>
 			<legend>
 				<label for="upload__product__cateogry">Category</label>
