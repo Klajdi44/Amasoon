@@ -20,10 +20,21 @@ if (strlen($_POST['category']) > _PRODUCT_CATEGORY_MAX_LEN) _res(400, ['info' =>
 
 //price
 if (!isset($_POST['price'])) _res(400, ['info' => 'Price required', 'error' => __LINE__]);
+if ($_POST['price'] == 0) _res(400, ['info' => 'Price cannot be zero', 'error' => __LINE__]);
 if (!ctype_digit($_POST['price'])) _res(400, ['info' => 'Price must contain only numbers', 'error' => __LINE__]);
 
 //image
+$image_allowed_types = [
+	'png', 'jpg', 'jpeg'
+];
+
 if (!isset($_FILES['image'])) _res(400, ['info' => 'Image required', 'error' => __LINE__]);
+$file_type = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+//check if file type is png,jpg or jpeg
+if (!in_array(strtolower($file_type), $image_allowed_types)) _res(400, ['info' => 'Only png, jpg, and jpeg formats
+are allowed', 'error' => __LINE__]);
+//check if file is empty
+if (!filesize($_FILES['image']['tmp_name'])) _res(400, ['info' => 'Image cannot be empty', 'error' => __LINE__]);
 
 
 $db = _db();

@@ -389,6 +389,14 @@ function _validate_product_price(form) {
     };
   }
 
+  if (form.price.value.trim() == 0) {
+    return {
+      fieldOk: false,
+      info: `Price cannot be zero`,
+      element: form.price,
+    };
+  }
+
   if (containsString(form.price.value.trim())) {
     return {
       fieldOk: false,

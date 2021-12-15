@@ -69,11 +69,10 @@ require_once(__DIR__ . '/components/top.php');
 			return infoElement.textContent = info;
 		}
 
-		// btn.disabled = true;
 		try {
 			const request = await fetch("./api/api_upload_product.php", {
 				method: "POST",
-				body: new FormData(event.target.form)
+				body: new FormData(form)
 			})
 
 			const response = await request.json();
