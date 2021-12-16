@@ -7,9 +7,11 @@ if (!_is_user_signed_in()) {
 	header('Location: index');
 }
 
+$_icon_className = 'edit-account';
 ?>
 
 <main class='edit__account  page-width'>
+	<?php require_once(__DIR__ . '/./components/back-button.php') ?>
 	<div class="edit__account__content__wrapper">
 		<h2 class="edit__account__title">Name, Number & Email</h2>
 		<p class="edit__account__error error"></p>

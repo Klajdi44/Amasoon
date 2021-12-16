@@ -110,7 +110,7 @@ function _renderProductOverview(
 		</article>
 	</section>`;
 
-  outputElement.insertAdjacentHTML("afterbegin", bluePrint);
+  outputElement.insertAdjacentHTML("beforeend", bluePrint);
 }
 
 //** user field validation functions

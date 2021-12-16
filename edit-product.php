@@ -9,9 +9,12 @@ _handle_loggedin_status();
 $_show_nav = true;
 $_documentTitle = 'Amasoon edit product';
 require_once(__DIR__ . '/components/top.php');
+
+$_icon_className = 'edit-product';
 ?>
 
 <main class="signup__container auth__container  page-width">
+	<?php require_once(__DIR__ . '/./components/back-button.php') ?>
 	<div class="signup__wrapper auth__wrapper">
 		<form onsubmit="return false" class="auth__form signup__form">
 			<h1 class="auth__form__title">Edit Product</h1>

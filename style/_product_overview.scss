@@ -44,3 +44,19 @@
     color: var(--color-primary);
   }
 }
+
+.back-icon {
+  font-size: 1.5em;
+  cursor: pointer;
+  margin-bottom: 1em;
+
+  &--product-overview {
+    margin-left: 1em;
+  }
+  &--edit-product,
+  &--edit-account {
+    display: grid;
+    place-self: flex-start;
+    margin-left: 1em;
+  }
+}
