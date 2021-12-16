@@ -35,6 +35,10 @@ if (!in_array(strtolower($file_type), $image_allowed_types)) _res(400, ['info' =
 are allowed', 'error' => __LINE__]);
 //check if file is empty
 if (!filesize($_FILES['image']['tmp_name'])) _res(400, ['info' => 'Image cannot be empty', 'error' => __LINE__]);
+//check if file is not above 5mb
+// phpinfo() to see php.ini path to change config.
+if ($_FILES['image']['size'] > _IMAGE_MAX_SIZE) _res(400, ['info' => 'Image cannot exceed ' . _IMAGE_MAX_SIZE / 1000000 . 'MB', 'error' => __LINE__]);
+
 
 
 $db = _db();

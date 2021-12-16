@@ -25,7 +25,7 @@ if (!ctype_digit($_POST['price'])) _res(400, ['info' => 'Price must contain only
 
 $imageAvailable = isset($_FILES['image']);
 if ($imageAvailable) {
-	//image
+	//image allowed types
 	$image_allowed_types = [
 		'png', 'jpg', 'jpeg'
 	];
@@ -36,13 +36,17 @@ if ($imageAvailable) {
 are allowed', 'error' => __LINE__]);
 	//check if file is empty
 	if (!filesize($_FILES['image']['tmp_name'])) _res(400, ['info' => 'Image cannot be empty', 'error' => __LINE__]);
+
+	//check if file is not above 5mb
+	// phpinfo() to see php.ini path to change config.
+	if ($_FILES['image']['size'] > _IMAGE_MAX_SIZE) _res(400, ['info' => 'Image cannot exceed ' . _IMAGE_MAX_SIZE / 1000000 . 'MB', 'error' => __LINE__]);
 }
 
 $db = _db();
 session_start();
 $product = $_SESSION['last_product'];
 $imageId = uniqid('', true);
-echo 'xxx';
+
 try {
 	$query = $db->prepare('UPDATE items SET title=:title,price = :price,description = :description,category = :category,image = :image WHERE id = :product_id');
 	$query->bindValue(':title', $_POST['title']);
@@ -68,9 +72,7 @@ try {
 		//delete previous image
 		unlink(__DIR__ . "/../assets/" . $product['image']);
 	}
-	$_SESSION['last_product'] = $_POST;
-
 	_res(200, ['info' => "success"]);
 } catch (Exception $ex) {
-	_res(500, ['info' => 'system under maintainance', 'error' => __LINE__]);
+	_res(500, ['info' => 'system under maintainance or no fields changed, please make sure to edit a field before saving.', 'error' => __LINE__]);
 }

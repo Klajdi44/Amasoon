@@ -39,7 +39,7 @@ require_once(__DIR__ . '/components/top.php');
 			</legend>
 			<legend>
 				<label for="upload__product__image">Image</label>
-				<small>Only png, jpg, and jpeg formats</small>
+				<small>Max 5MB. Only png, jpg, and jpeg formats</small>
 				<input id="upload__product__image" accept="image/png, image/jpg, image/jpeg" class="upload__product__image " name="image" type="file" placeholder=" ">
 			</legend>
 			<legend class="product__btn__container">

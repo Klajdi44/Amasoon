@@ -1,4 +1,8 @@
 <?php
+session_start();
+if ($_GET['id'] !== $_SESSION['last_product']['id']) {
+	header('location: ./products.php');
+}
 require_once(__DIR__ . '/private/globals.php');
 _handle_loggedin_status();
 
@@ -38,7 +42,7 @@ require_once(__DIR__ . '/components/top.php');
 			</legend>
 			<legend>
 				<label for="upload__product__image">Image</label>
-				<small>Only png, jpg, and jpeg formats. Choose only if you want to change current image.</small>
+				<small>Choose only if you want to change current image, 5MB max.Only png, jpg, and jpeg formats. </small>
 				<input id="upload__product__image" accept="image/png, image/jpg, image/jpeg" class="upload__product__image " name="image" type="file" placeholder=" ">
 			</legend>
 			<legend class="product__btn__container">
@@ -50,7 +54,6 @@ require_once(__DIR__ . '/components/top.php');
 
 <script type='module'>
 	const form = _dqs('.auth__form');
-
 
 	(function() {
 		for (let i = 0, option = form.category.options; i < form.category.options.length; i++) {
@@ -94,14 +97,11 @@ require_once(__DIR__ . '/components/top.php');
 			if (request.ok) {
 				infoElement.id = 'success';
 				setTimeout(() => {
-					infoElement.textContent = ''
-					infoElement.id = '';
-					form.reset();
-				}, 1500);
-
+					window.location = './bridges/product_bridge.php';
+				}, 2000);
 			}
 		} catch (error) {
-
+			console.error(error?.message);
 		}
 	}
 </script>
