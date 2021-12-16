@@ -1,13 +1,13 @@
 <?php
-include_once(__DIR__ . '/private/globals.php');
+require_once(__DIR__ . '/private/globals.php');
 
 if (!_is_user_signed_in()) {
 	header('Location: index');
 }
 $_show_nav = true;
-@require_once(__DIR__ . '/components/top.php');
+require_once(__DIR__ . '/components/top.php');
 $_title = 'Edit your current password';
-@require_once(__DIR__ . '/components/password.php');
+require_once(__DIR__ . '/components/password.php');
 ?>
 
 <script type="module">
@@ -47,7 +47,7 @@ $_title = 'Edit your current password';
 				infoElement.id = 'success';
 
 				setTimeout(() => {
-					window.location.href = "edit-account.php";
+					window.location.href = "./edit-account";
 				}, 2500);
 			}
 		} catch (error) {

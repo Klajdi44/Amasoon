@@ -1,8 +1,14 @@
 const _USERNAME_MIN_LEN = 1;
 const _USERNAME_MAX_LEN = 50;
+const _USER_LAST_NAME_MIN_LEN = 1;
+const _USER_LAST_NAME_MAX_LEN = 50;
 const _PASSWORD_MIN_LEN = 8;
 const _PASSWORD_MAX_LEN = 20;
 const _PHONE_LEN = 8;
+const _PRODUCT_TITLE_MIN_LEN = 1;
+const _PRODUCT_TITLE_MAX_LEN = 150;
+const _PRODUCT_DESCRIPTION_MIN_LEN = 10;
+const _PRODUCT_DESCRIPTION_MAX_LEN = 500;
 
 function _dqs(element, selectAll = false) {
   return selectAll
@@ -41,7 +47,75 @@ function _testEmail(email) {
   else return false;
 }
 
-function _validateName(form, infoElement) {
+function _renderProducts(products, outputElement, isPartnerProduct = false) {
+  products.forEach(product => {
+    const bluePrint = `
+<article class="product__item"> 
+<a href='./product-overview?id=${product.id}' >
+<img class='product__img' src=${
+      isPartnerProduct
+        ? `https://coderspage.com/2021-F-Web-Dev-Images/${product.image}`
+        : `./assets/${product.image}`
+    } alt="product">
+<div class="product__body">
+  <h2 class="product__title">${product.title}</h2>
+  <h3 class="product__price">Kr.${product.price}</h3>
+</div>
+</a>
+</article>
+`;
+    outputElement.insertAdjacentHTML("beforeend", bluePrint);
+  });
+}
+
+function _renderCategories(categories, outputElement) {
+  categories.forEach(({ category }) => {
+    const bluePrint = `
+		<article class="category">
+			<a href=./products?category=${category}>
+				<h2 class='category__title'>${category}</h2>
+				<img class="category__image" src="./assets/${category}.png" alt="Electronics">
+			</a>
+		</article>
+`;
+    outputElement.insertAdjacentHTML("beforeend", bluePrint);
+  });
+}
+
+function _renderProductOverview(
+  product,
+  outputElement,
+  isPartnerProduct = false,
+  user_id = ""
+) {
+  const bluePrint = `
+  <section class="product__overview">
+		<img class='product__overview__img'  src=${
+      isPartnerProduct
+        ? `https://coderspage.com/2021-F-Web-Dev-Images/${product.image}`
+        : `./assets/${product.image}`
+    } alt="">
+		<article class="product__overview__content">
+			<div class="product__overview__body">
+				<h2 class="product__overview__title">${product.title}</h2>
+				<h3 class="product__overview__price">Kr.${product.price}</h3>
+			</div>
+			<p class="product__overview__description">${product.description}</p>
+      ${
+        user_id === product?.owner_id
+          ? `<button type="button" class="secondary-button product__overview__edit__btn"><a href=./edit-product?id=${product.id}>Edit</a></button>`
+          : ""
+      }
+     
+		</article>
+	</section>`;
+
+  outputElement.insertAdjacentHTML("beforeend", bluePrint);
+}
+
+//** user field validation functions
+
+function _validateName(form) {
   if (form.user_name.value.trim().length < _USERNAME_MIN_LEN) {
     return {
       fieldOk: false,
@@ -64,6 +138,38 @@ function _validateName(form, infoElement) {
       fieldOk: false,
       info: "Name cannot contain numbers",
       element: form.user_name,
+    };
+  }
+  return {
+    fieldOk: true,
+    info: "",
+    element: "",
+  };
+}
+
+function _validateLastName(form) {
+  if (form.user_last_name.value.trim().length < _USER_LAST_NAME_MIN_LEN) {
+    return {
+      fieldOk: false,
+      info: `Last name must be at least ${_USER_LAST_NAME_MIN_LEN} characters long`,
+      element: form.user_last_name,
+    };
+  }
+
+  if (form.user_last_name.value.trim().length > _USER_LAST_NAME_MAX_LEN) {
+    focus(form.user_last_name);
+    return {
+      fieldOk: false,
+      info: `Last name cannot be more than ${_USER_LAST_NAME_MAX_LEN} characters long`,
+      element: form.user_last_name,
+    };
+  }
+
+  if (containsNumber(form.user_last_name.value.trim())) {
+    return {
+      fieldOk: false,
+      info: "Last name cannot contain numbers",
+      element: form.user_last_name,
     };
   }
   return {
@@ -184,9 +290,13 @@ function _validatePassword(form, skipConfirmPass = false) {
 }
 
 function _validateFields(form, skipPassword = false) {
-  //username
+  //user name
   if (!_validateName(form).fieldOk) {
     return _validateName(form);
+  }
+  //user last name
+  if (!_validateLastName(form).fieldOk) {
+    return _validateLastName(form);
   }
 
   //email
@@ -210,3 +320,151 @@ function _validateFields(form, skipPassword = false) {
     fieldOk: true,
   };
 }
+//** end of user field validation functions
+
+//** Product field validation
+function _validate_product_title(form) {
+  if (form.title.value.trim().length < _PRODUCT_TITLE_MIN_LEN) {
+    return {
+      fieldOk: false,
+      info: `Title must be at least ${_PRODUCT_TITLE_MIN_LEN} characters long`,
+      element: form.title,
+    };
+  }
+
+  if (form.title.value.trim().length > _PRODUCT_TITLE_MAX_LEN) {
+    return {
+      fieldOk: false,
+      info: `Title cannot be more than ${_PRODUCT_TITLE_MAX_LEN} characters long`,
+      element: form.title,
+    };
+  }
+
+  return {
+    fieldOk: true,
+    info: "",
+    element: "",
+  };
+}
+
+function _validate_product_description(form) {
+  if (form.description.value.trim().length < _PRODUCT_DESCRIPTION_MIN_LEN) {
+    return {
+      fieldOk: false,
+      info: `Description must be at least ${_PRODUCT_DESCRIPTION_MIN_LEN} characters long`,
+      element: form.description,
+    };
+  }
+
+  if (form.description.value.trim().length > _PRODUCT_DESCRIPTION_MAX_LEN) {
+    return {
+      fieldOk: false,
+      info: `Description cannot be more than ${_PRODUCT_DESCRIPTION_MAX_LEN} characters long`,
+      element: form.description,
+    };
+  }
+
+  return {
+    fieldOk: true,
+    info: "",
+    element: "",
+  };
+}
+
+function _validate_product_category(form) {
+  if (form.category.selectedIndex === 0) {
+    return {
+      fieldOk: false,
+      info: `Please select a category first`,
+      element: form.category,
+    };
+  }
+
+  return {
+    fieldOk: true,
+    info: "",
+    element: "",
+  };
+}
+
+function _validate_product_price(form) {
+  if (!form.price.value.trim()) {
+    return {
+      fieldOk: false,
+      info: `Price is required`,
+      element: form.price,
+    };
+  }
+
+  if (form.price.value.trim() == 0) {
+    return {
+      fieldOk: false,
+      info: `Price cannot be zero`,
+      element: form.price,
+    };
+  }
+
+  if (containsString(form.price.value.trim())) {
+    return {
+      fieldOk: false,
+      info: `Price cannot contain letters`,
+      element: form.price,
+    };
+  }
+
+  return {
+    fieldOk: true,
+    info: "",
+    element: "",
+  };
+}
+
+function _validate_product_image(form) {
+  if (form.image.value === "") {
+    return {
+      fieldOk: false,
+      info: `Please select an image first`,
+      element: form.image,
+    };
+  }
+
+  return {
+    fieldOk: true,
+    info: "",
+    element: "",
+  };
+}
+
+function _validateProductFields(form, skipImage = false) {
+  //title
+  if (!_validate_product_title(form).fieldOk) {
+    return _validate_product_title(form);
+  }
+  //description
+  if (!_validate_product_description(form).fieldOk) {
+    return _validate_product_description(form);
+  }
+
+  //category
+  if (!_validate_product_category(form).fieldOk) {
+    return _validate_product_category(form);
+  }
+
+  //price
+  if (!_validate_product_price(form).fieldOk) {
+    return _validate_product_price(form);
+  }
+
+  if (!skipImage) {
+    //image
+    if (!_validate_product_image(form).fieldOk) {
+      return _validate_product_image(form);
+    }
+  }
+
+  return {
+    fieldOk: true,
+  };
+}
+
+//** Product validation function

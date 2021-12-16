@@ -1,0 +1,62 @@
+@import "./mixins";
+
+.product__overview__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product__overview {
+  margin-top: 2em;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2em;
+  @include mediaQuery(tablet) {
+    justify-content: space-around;
+    flex-direction: row;
+  }
+
+  &__img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+
+    @include mediaQuery(tablet) {
+      width: 300px;
+      height: 300px;
+    }
+    @include mediaQuery(laptop) {
+      width: 600px;
+      height: 600px;
+    }
+  }
+
+  &__price {
+    margin-top: 0.5em;
+  }
+}
+
+.product__overview__edit__btn {
+  width: 100px;
+  & > a {
+    color: var(--color-primary);
+  }
+}
+
+.back-icon {
+  font-size: 1.5em;
+  cursor: pointer;
+  margin-bottom: 1em;
+
+  &--product-overview {
+    margin-left: 1em;
+  }
+  &--edit-product,
+  &--edit-account {
+    display: grid;
+    place-self: flex-start;
+    margin-left: 1em;
+  }
+}

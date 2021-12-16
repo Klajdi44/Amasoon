@@ -1,0 +1,44 @@
+.account {
+  min-height: 100vh;
+  max-width: 1000px;
+  margin: 2em auto;
+  padding: 0.5em;
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  &__link {
+    color: var(--color-primary);
+  }
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  max-width: 400px;
+  &:hover {
+    background: var(--border-color);
+    transition: all 0.3s;
+  }
+
+  &__icon {
+    width: clamp(50px, 6vw, 80px);
+    object-fit: cover;
+  }
+
+  &__title {
+    font-size: 1.1em;
+    font-weight: 400;
+  }
+}

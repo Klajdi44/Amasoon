@@ -8,7 +8,7 @@ $_documentTitle = 'Amasoon Registration';
 require_once(__DIR__ . '/components/top.php');
 ?>
 
-<div class="signup__container auth__container">
+<main class="signup__container auth__container  page-width">
   <?php require_once(__DIR__ . '/components/logo.php') ?>
   <div class="signup__wrapper auth__wrapper">
     <form onsubmit="return false" class="auth__form signup__form">
@@ -16,8 +16,13 @@ require_once(__DIR__ . '/components/top.php');
       <p class="auth__form__error error"></p>
       <legend>
         <label for="user_name">Your name</label>
-        <small>e.g John Doe</small>
+        <small>e.g John</small>
         <input id="user_name" class="user_name input" name="user_name" type="text" placeholder=" ">
+      </legend>
+      <legend>
+        <label for="user_last_name">Your last name</label>
+        <small>e.g Doe</small>
+        <input id="user_last_name" class="user_last_name input" name="user_last_name" type="text" placeholder=" ">
       </legend>
       <legend>
         <label for="user_email">Email</label>
@@ -49,7 +54,7 @@ require_once(__DIR__ . '/components/top.php');
     </form>
 
   </div>
-</div>
+</main>
 
 <script type='module'>
   _dqs('.signup__button').onclick = signup;

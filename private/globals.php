@@ -1,9 +1,22 @@
 <?php
 define('_USERNAME_MIN_LEN', 1);
 define('_USERNAME_MAX_LEN', 50);
+define('_USERLASTNAME_MIN_LEN', 1);
+define('_USERLASTNAME_MAX_LEN', 50);
 define('_PASSWORD_MIN_LEN', 8);
 define('_PASSWORD_MAX_LEN', 20);
 define('_PHONE_LEN', 8);
+define('_PRODUCT_TITLE_MIN_LEN', 1);
+define('_PRODUCT_TITLE_MAX_LEN', 150);
+define('_PRODUCT_DESCRIPTION_MIN_LEN', 10);
+define('_PRODUCT_DESCRIPTION_MAX_LEN', 500);
+define('_PRODUCT_CATEGORY_MIN_LEN', 1);
+define('_PRODUCT_CATEGORY_MAX_LEN', 50);
+//5mb
+define('_IMAGE_MAX_SIZE', 5000000);
+
+
+
 
 function _res($status = 200, $message = [], $exit = true)
 {
@@ -35,6 +48,12 @@ function _is_user_signed_in()
     return true;
   }
   exit();
+}
+function _handle_loggedin_status($path = 'index')
+{
+  if (!_is_user_signed_in()) {
+    header("Location: $path");
+  }
 }
 
 function  _contains_number($string)

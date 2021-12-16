@@ -1,8 +1,8 @@
 <?php
-include_once(__DIR__ . '/components/top.php');
+require_once(__DIR__ . '/components/top.php');
 ?>
 
-<section class="forgot__password__container">
+<section class="forgot__password__container  page-width">
 	<?php require_once(__DIR__ . '/components/logo.php') ?>
 
 	<p class="forgot__password__info error"></p>
