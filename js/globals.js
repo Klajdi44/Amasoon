@@ -51,7 +51,7 @@ function _renderProducts(products, outputElement, isPartnerProduct = false) {
   products.forEach(product => {
     const bluePrint = `
 <article class="product__item"> 
-<a href='./product-overview.php?id=${product.id}' >
+<a href='./product-overview?id=${product.id}' >
 <img class='product__img' src=${
       isPartnerProduct
         ? `https://coderspage.com/2021-F-Web-Dev-Images/${product.image}`
@@ -72,7 +72,7 @@ function _renderCategories(categories, outputElement) {
   categories.forEach(({ category }) => {
     const bluePrint = `
 		<article class="category">
-			<a href=./products.php?category=${category}>
+			<a href=./products?category=${category}>
 				<h2>${category}</h2>
 				<img class="category__image" src="./assets/${category}.png" alt="Electronics">
 			</a>
@@ -103,7 +103,7 @@ function _renderProductOverview(
 			<p class="product__overview__description">${product.description}</p>
       ${
         user_id === product?.owner_id
-          ? `<button type="button" class="secondary-button product__overview__edit__btn"><a href=./edit-product.php?id=${product.id}>Edit</a></button>`
+          ? `<button type="button" class="secondary-button product__overview__edit__btn"><a href=./edit-product?id=${product.id}>Edit</a></button>`
           : ""
       }
      

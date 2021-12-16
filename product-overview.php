@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/private/globals.php');
 $_show_nav = true;
 $_documentTitle = $_GET['category'] ?? 'Products';
-@require_once(__DIR__ . '/components/top.php');
+require_once(__DIR__ . '/components/top.php');
 ?>
 <main class='product__overview__container page-width'>
 

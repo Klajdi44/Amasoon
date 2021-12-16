@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_GET['id'] !== $_SESSION['last_product']['id']) {
-	header('location: ./products.php');
+	header('location: ./products');
 }
 require_once(__DIR__ . '/private/globals.php');
 _handle_loggedin_status();

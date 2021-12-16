@@ -11,7 +11,7 @@ if ($userSignedIn) {
 
 
 <nav class="nav">
-	<a class="nav__logo__container" href="./index.php"> <img class="nav__logo" src='./assets/logoWhite.svg' alt="logo"></a>
+	<a class="nav__logo__container" href="./index"> <img class="nav__logo" src='./assets/logoWhite.svg' alt="logo"></a>
 	<div class="nav__search__container">
 		<input class="nav__search" type="search">
 		<button class="nav__search__button"> <i class="fas fa-search"></i>

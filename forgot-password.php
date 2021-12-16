@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__ . '/components/top.php');
+require_once(__DIR__ . '/components/top.php');
 ?>
 
 <section class="forgot__password__container  page-width">

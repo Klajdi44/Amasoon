@@ -1,7 +1,7 @@
 <?php
 $_show_nav = true;
-include_once(__DIR__ . '/components/top.php');
-include_once(__DIR__ . '/private/globals.php');
+require_once(__DIR__ . '/components/top.php');
+require_once(__DIR__ . '/private/globals.php');
 
 if (!_is_user_signed_in()) {
 	header('Location: index');
@@ -44,7 +44,7 @@ if (!_is_user_signed_in()) {
 					<strong>Password</strong>
 					<p>******</p>
 				</article>
-				<a href="./edit-password.php">
+				<a href="./edit-password">
 					<input type='button' class="secondary-button edit__account__edit__btn" value="Edit">
 				</a>
 			</section>

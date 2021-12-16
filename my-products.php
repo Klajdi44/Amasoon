@@ -3,7 +3,7 @@ require_once(__DIR__ . '/private/globals.php');
 _handle_loggedin_status();
 $_show_nav = true;
 $_documentTitle = 'MY Products';
-@require_once(__DIR__ . '/components/top.php');
+require_once(__DIR__ . '/components/top.php');
 ?>
 
 <main class='products__container  page-width'>
