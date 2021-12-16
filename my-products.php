@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/private/globals.php');
 _handle_loggedin_status();
 $_show_nav = true;
-$_documentTitle = 'MY Products';
+$_documentTitle = 'My Products';
 require_once(__DIR__ . '/components/top.php');
 ?>
 

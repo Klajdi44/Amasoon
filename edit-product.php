@@ -7,7 +7,7 @@ require_once(__DIR__ . '/private/globals.php');
 _handle_loggedin_status();
 
 $_show_nav = true;
-$_documentTitle = 'Amasoon edit product';
+$_documentTitle = 'Edit product';
 require_once(__DIR__ . '/components/top.php');
 
 $_icon_className = 'edit-product';

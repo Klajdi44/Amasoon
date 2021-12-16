@@ -23,14 +23,15 @@ require_once(__DIR__ . '/components/top.php');
 	</section>
 
 
-	<section class="products__container">
+	<section class="partner__products__container">
+		<h1 class="partner__products__title">Products from partners</h1>
 		<article class="my__products"></article>
 	</section>
 </main>
 
 <script type="module">
 	const apiInfo = [{
-		path: './bridges/generator.php',
+		path: './api/api_shop_generator.php',
 		outputElement: _dqs('.my__products'),
 		localStorageName: 'shopProducts',
 		renderFunc: _renderProducts,

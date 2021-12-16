@@ -5,6 +5,7 @@ if (!_is_user_signed_in()) {
 	header('Location: index');
 }
 $_show_nav = true;
+$_documentTitle = 'Edit-password';
 require_once(__DIR__ . '/components/top.php');
 $_title = 'Edit your current password';
 require_once(__DIR__ . '/components/password.php');

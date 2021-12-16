@@ -1,5 +1,6 @@
 <?php
 $_show_nav = true;
+$_documentTitle = 'Edit account';
 require_once(__DIR__ . '/components/top.php');
 require_once(__DIR__ . '/private/globals.php');
 

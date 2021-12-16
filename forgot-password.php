@@ -1,4 +1,5 @@
 <?php
+$_documentTitle = 'Forgot password';
 require_once(__DIR__ . '/components/top.php');
 ?>
 

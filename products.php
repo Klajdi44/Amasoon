@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/private/globals.php');
 $_show_nav = true;
-$_documentTitle = $_GET['category'] ?? 'Products';
+$_documentTitle = 'Products';
 require_once(__DIR__ . '/components/top.php');
 ?>
 

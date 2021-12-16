@@ -4,7 +4,7 @@ if (isset($_SESSION['user_id'])) {
   header('Location: index');
 }
 
-$_documentTitle = 'Amasoon Registration';
+$_documentTitle = 'Registration';
 require_once(__DIR__ . '/components/top.php');
 ?>
 

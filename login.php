@@ -4,7 +4,7 @@ if (isset($_SESSION['user_id'])) {
   header('Location: index');
 }
 
-$_documentTitle = 'sign in';
+$_documentTitle = 'Log in';
 require_once(__DIR__ . '/components/top.php');
 ?>
 <div class="auth__container  page-width">

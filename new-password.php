@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . '/components/top.php');
-$_title = 'Create a new password!';
+$_documentTitle = 'New password';
 $_show_logo = true;
 require_once(__DIR__ . '/components/password.php');
 ?>
