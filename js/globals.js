@@ -73,7 +73,7 @@ function _renderCategories(categories, outputElement) {
     const bluePrint = `
 		<article class="category">
 			<a href=./products?category=${category}>
-				<h2>${category}</h2>
+				<h2 class='category__title'>${category}</h2>
 				<img class="category__image" src="./assets/${category}.png" alt="Electronics">
 			</a>
 		</article>

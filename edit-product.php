@@ -31,7 +31,8 @@ require_once(__DIR__ . '/components/top.php');
 				<select class="upload__product__category input" name="category" id="upload__product__cateogry">
 					<option hidden value="">Select category</option>
 					<option value="electronics">Electronics</option>
-					<option value="household">household</option>
+					<option value="art">Art</option>
+					<option value="music">Music</option>
 					<option value="kitchenware">kitchenware</option>
 				</select>
 			</legend>

@@ -17,7 +17,7 @@ require_once(__DIR__ . '/components/top.php');
 		<article id="category__all" class="category">
 			<a href='./products.php'>
 				<h2>All Categories</h2>
-				<img class="category__image" src="./assets/electronics.png" alt="Electronics">
+				<img class="category__image" src="./assets/all-categories.png" alt="Electronics">
 			</a>
 		</article>
 	</section>

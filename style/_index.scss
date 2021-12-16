@@ -33,5 +33,9 @@
       height: 300px;
       object-fit: contain;
     }
+
+    &__title::first-letter {
+      text-transform: capitalize;
+    }
   }
 }
