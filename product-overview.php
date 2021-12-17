@@ -38,7 +38,7 @@ $_icon_className = 'product-overview';
 			const response = await request.json();
 
 			if (request.ok) {
-				_renderProductOverview(response.info, productContainer, false, '<?= $_SESSION["user_id"] ?>');
+				_renderProductOverview(response.info, productContainer, false, '<?= $_SESSION["user_id"] ?>', Number('<?= $_SESSION["is_admin"] ?>'));
 			}
 		} catch (error) {
 			console.error(error?.message);
