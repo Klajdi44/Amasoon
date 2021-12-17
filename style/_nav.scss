@@ -103,7 +103,9 @@
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    cursor: pointer;
   }
+
   &__dropdown__content a:hover {
     background: var(--gradient);
     color: var(--color-secondary);
@@ -120,5 +122,11 @@
     color: var(--color-white);
     margin-right: 1em;
     text-decoration: underline;
+  }
+
+  &__is__verified {
+    background: var(--color-secondary);
+    color: var(--color-white);
+    padding-left: 1.1em;
   }
 }
