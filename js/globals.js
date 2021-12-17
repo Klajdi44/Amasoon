@@ -103,7 +103,7 @@ function _renderProductOverview(
 			<p class="product__overview__description">${product.description}</p>
       ${
         user_id === product?.owner_id
-          ? `<button type="button" class="secondary-button product__overview__edit__btn"><a href=./edit-product?id=${product.id}>Edit</a></button>`
+          ? `<a  class="secondary-button product__overview__edit__btn" href=./edit-product?id=${product.id}>Edit</a>`
           : ""
       }
      

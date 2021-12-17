@@ -40,9 +40,8 @@
 
 .product__overview__edit__btn {
   width: 100px;
-  & > a {
-    color: var(--color-primary);
-  }
+  color: var(--color-primary);
+  text-align: center;
 }
 
 .back-icon {
