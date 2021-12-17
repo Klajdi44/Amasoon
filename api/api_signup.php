@@ -70,7 +70,7 @@ try {
   $_name = $_POST['user_name'];
   $_subject = "Email verification";
   $_message = "Thank you for signing up $_name!,
-   <a href='http://localhost:8080/amasoon/verify-email.php?key=$verification_key'> click here to verify your account </a>";
+   <a href='http://localhost:8080/verify-email?key=$verification_key'> click here to verify your account </a>";
   require_once(__DIR__ . '/../private/send_email.php');
 
   // Success

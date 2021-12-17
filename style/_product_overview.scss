@@ -54,7 +54,9 @@
     margin-left: 1em;
   }
   &--edit-product,
-  &--edit-account {
+  &--edit-account,
+  &--upload__product,
+  &--account {
     display: grid;
     place-self: flex-start;
     margin-left: 1em;

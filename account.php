@@ -5,11 +5,12 @@ $_show_nav = true;
 $_documentTitle = 'Account';
 
 require_once(__DIR__ . '/components/top.php');
+$_icon_className = 'account';
 ?>
 
 
 <main class='account  page-width'>
-
+	<?php require_once(__DIR__ . "/components/back-button.php") ?>
 	<h1 class="account__title">Your Account</h1>
 
 	<section class="account__body">

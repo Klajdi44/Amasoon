@@ -5,10 +5,11 @@ _handle_loggedin_status();
 $_show_nav = true;
 $_documentTitle = 'Upload product';
 require_once(__DIR__ . '/components/top.php');
+$_icon_className = 'upload__product';
 ?>
 
 <main class="signup__container auth__container  page-width">
-
+	<?php require_once(__DIR__ . "/components/back-button.php") ?>
 	<div class="signup__wrapper auth__wrapper">
 		<form onsubmit="return false" class="auth__form signup__form">
 			<h1 class="auth__form__title">Upload Product</h1>
