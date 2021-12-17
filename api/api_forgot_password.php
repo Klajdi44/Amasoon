@@ -26,7 +26,7 @@ try {
 	$_name = $row['user_name'];
 	$_subject = "Password assistance";
 	$_message = "Hello $_name, you forgot your password,
-   <a href='http://localhost:8080/amasoon/new-password.php?key=$forgot_password_key'> click here to create a new one!</a>";
+   <a href='http://localhost:8080/new-password.php?key=$forgot_password_key'> click here to create a new one!</a>";
 	require_once(__DIR__ . '/../private/send_email.php');
 
 	//success

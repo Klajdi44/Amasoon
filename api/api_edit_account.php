@@ -71,10 +71,11 @@ try {
 		$_name = $_POST['user_name'];
 		$_subject = "Email verification";
 		$_message = "Email changed $_name,
-		 <a href='http://localhost:8080/amasoon/verify-email.php?key=$verification_key'> click here to verify your email </a>";
+		 <a href='http://localhost:8080/verify-email.php?key=$verification_key'> click here to verify your email </a>";
 		require_once(__DIR__ . '/../private/send_email.php');
 
 		$_SESSION['is_verified'] = 0;
+		$_SESSION['verified_msg_shown'] = 0;
 	}
 
 	$db->commit();

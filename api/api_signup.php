@@ -70,7 +70,7 @@ try {
   $_name = $_POST['user_name'];
   $_subject = "Email verification";
   $_message = "Thank you for signing up $_name!,
-   <a href='http://localhost:8080/amasoon/verify-email.php?key=$verification_key'> click here to verify your account </a>";
+   <a href='http://localhost:8080/verify-email?key=$verification_key'> click here to verify your account </a>";
   require_once(__DIR__ . '/../private/send_email.php');
 
   // Success
@@ -92,10 +92,12 @@ try {
     'api_key' => $_sms_api_key,
     'message' =>  "Thank you for signing up on Amasoon! Please verify your account on your email!"
   ];
-  $sms_response = _curl_post($url, $data);
-
-  if ($sms_response != 'OK') {
-    //TODO: maybe add another field to db e.g sms_sent if false then try to connect to db and change that to 1
+  $sms_response = json_decode(_curl_post($url, $data), true);
+  if (!$sms_response['sms_id']) {
+    $query = $db->prepare('INSERT INTO sms_not_sent VALUES(:id,:user_id)');
+    $query->bindValue('id', null);
+    $query->bindValue(':user_id', $user_id);
+    $query->execute();
   }
   exit();
 } catch (Exception $ex) {

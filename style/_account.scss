@@ -26,10 +26,15 @@
   padding: 10px;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
+  margin: auto;
   max-width: 400px;
   &:hover {
     background: var(--border-color);
     transition: all 0.3s;
+  }
+
+  @include mediaQuery(tablet) {
+    margin: 0;
   }
 
   &__icon {

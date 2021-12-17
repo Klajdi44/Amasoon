@@ -3,6 +3,7 @@ session_start();
 if ($_SESSION['is_verified']) {
 	header('Location: index');
 }
+$_documentTitle = 'Email verification';
 ?>
 
 <?php require_once(__DIR__ . '/components/top.php') ?>

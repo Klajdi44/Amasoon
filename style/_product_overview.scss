@@ -40,9 +40,8 @@
 
 .product__overview__edit__btn {
   width: 100px;
-  & > a {
-    color: var(--color-primary);
-  }
+  color: var(--color-primary);
+  text-align: center;
 }
 
 .back-icon {
@@ -54,7 +53,9 @@
     margin-left: 1em;
   }
   &--edit-product,
-  &--edit-account {
+  &--edit-account,
+  &--upload__product,
+  &--account {
     display: grid;
     place-self: flex-start;
     margin-left: 1em;

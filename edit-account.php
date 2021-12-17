@@ -1,11 +1,11 @@
 <?php
 $_show_nav = true;
+$_documentTitle = 'Edit account';
 require_once(__DIR__ . '/components/top.php');
 require_once(__DIR__ . '/private/globals.php');
 
-if (!_is_user_signed_in()) {
-	header('Location: index');
-}
+_handle_loggedin_status();
+
 
 $_icon_className = 'edit-account';
 ?>
@@ -17,11 +17,11 @@ $_icon_className = 'edit-account';
 		<p class="edit__account__error error"></p>
 		<form id="form" onsubmit="return false" class="edit__account__container">
 			<legend class="edit__account__field user_name">
-				<label for="user_name">Full name</label>
+				<label for="user_name">First name</label>
 				<input id="user_name" class="user_name input" name="user_name" type="text" placeholder=" " value="<?= $_SESSION['user_name'] ?>">
 			</legend>
 			<legend class="edit__account__field user_name">
-				<label for="user_last_name">Full name</label>
+				<label for="user_last_name">Last name</label>
 				<input id="user_last_name" class="user_last_name input" name="user_last_name" type="text" placeholder=" " value="<?= $_SESSION['user_last_name'] ?>">
 			</legend>
 			<legend class="edit__account__field user_email">

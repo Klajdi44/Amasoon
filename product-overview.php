@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/private/globals.php');
 $_show_nav = true;
-$_documentTitle = $_GET['category'] ?? 'Products';
+$_documentTitle = "Product overview";
 require_once(__DIR__ . '/components/top.php');
 
 $_icon_className = 'product-overview';
@@ -36,9 +36,9 @@ $_icon_className = 'product-overview';
 			});
 
 			const response = await request.json();
-			console.log(response);
+
 			if (request.ok) {
-				_renderProductOverview(response.info, productContainer, false, '<?= $_SESSION["user_id"] ?>');
+				_renderProductOverview(response.info, productContainer, false, '<?= $_SESSION["user_id"] ?>', Number('<?= $_SESSION["is_admin"] ?>'));
 			}
 		} catch (error) {
 			console.error(error?.message);

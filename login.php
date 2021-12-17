@@ -4,7 +4,7 @@ if (isset($_SESSION['user_id'])) {
   header('Location: index');
 }
 
-$_documentTitle = 'sign in';
+$_documentTitle = 'Log in';
 require_once(__DIR__ . '/components/top.php');
 ?>
 <div class="auth__container  page-width">
@@ -80,13 +80,13 @@ require_once(__DIR__ . '/components/top.php');
 
     formData.append('user_password', form.user_password.value);
     try {
-      let conn = await fetch("api/api_login", {
+      const conn = await fetch("api/api_login", {
         method: "POST",
         body: formData
       })
 
-      let res = await conn.json();
-      console.log(res);
+      const res = await conn.json();
+
       document.querySelector('.auth__form__error').textContent = res?.info;
       if (conn.ok) {
         location.href = "index"

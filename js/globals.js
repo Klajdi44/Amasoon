@@ -86,7 +86,8 @@ function _renderProductOverview(
   product,
   outputElement,
   isPartnerProduct = false,
-  user_id = ""
+  user_id = "",
+  isAdmin = false
 ) {
   const bluePrint = `
   <section class="product__overview">
@@ -102,8 +103,8 @@ function _renderProductOverview(
 			</div>
 			<p class="product__overview__description">${product.description}</p>
       ${
-        user_id === product?.owner_id
-          ? `<button type="button" class="secondary-button product__overview__edit__btn"><a href=./edit-product?id=${product.id}>Edit</a></button>`
+        user_id === product?.owner_id || isAdmin
+          ? `<a  class="secondary-button product__overview__edit__btn" href=./edit-product?id=${product.id}>Edit</a>`
           : ""
       }
      

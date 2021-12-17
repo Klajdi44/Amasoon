@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/private/globals.php');
 _handle_loggedin_status();
 $_show_nav = true;
-$_documentTitle = 'MY Products';
+$_documentTitle = 'My Products';
 require_once(__DIR__ . '/components/top.php');
 ?>
 
@@ -27,7 +27,7 @@ require_once(__DIR__ . '/components/top.php');
 			});
 
 			const response = await request.json();
-			console.log(response);
+
 			if (request.ok) {
 				_dqs('.my__products__length').textContent = response.info.length ?? [];
 				const productContainer = _dqs('.my__products');

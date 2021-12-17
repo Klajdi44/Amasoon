@@ -17,10 +17,9 @@
     padding: 1em;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    background: var(--color-background);
     cursor: pointer;
     &:hover {
-      background: var(--border-color);
+      background: var(--color-background);
     }
 
     a {
@@ -34,8 +33,16 @@
       object-fit: contain;
     }
 
-    &__title::first-letter {
-      text-transform: capitalize;
+    &__title {
+      text-align: center;
+      &::first-letter {
+        text-transform: capitalize;
+      }
     }
   }
+}
+
+.partner__products__container {
+  margin-top: 4em;
+  padding: 1em;
 }
