@@ -36,7 +36,7 @@ $_icon_className = 'product-overview';
 			});
 
 			const response = await request.json();
-			console.log(response);
+
 			if (request.ok) {
 				_renderProductOverview(response.info, productContainer, false, '<?= $_SESSION["user_id"] ?>');
 			}

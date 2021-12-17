@@ -40,7 +40,6 @@ require_once(__DIR__ . '/components/password.php');
 			})
 
 			let response = await request.json();
-			console.log(response);
 
 			infoElement.textContent = response?.info;
 

@@ -29,7 +29,7 @@ require_once(__DIR__ . '/components/top.php');
 			});
 
 			const response = await request.json();
-			console.log(response);
+
 			if (request.ok) {
 				_dqs('.my__products__length').textContent = response.length ?? [];
 				const productContainer = _dqs('.my__products');

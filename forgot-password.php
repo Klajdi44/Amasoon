@@ -53,7 +53,7 @@ require_once(__DIR__ . '/components/top.php');
 
 			const response = await request.
 			json();
-			console.log(response);
+
 			_dqs('.forgot__password__info').textContent = response?.info;
 
 			if (request.ok) {
