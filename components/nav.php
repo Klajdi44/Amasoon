@@ -18,11 +18,11 @@ if ($userSignedIn) {
 		</button>
 	</div>
 
-	<div class="nav__login">
+	<p class="nav__login">
 		<?php
 		echo $userSignedIn ?  "Hello, $username" : "Hello, sign in"
 		?>
-	</div>
+	</p>
 	<div class="nav__login__section__container">
 
 		<span class=<?= $userSignedIn ? 'nav__login__section hidden'  : 'nav__login__section' ?>>
@@ -31,8 +31,15 @@ if ($userSignedIn) {
 			<p class="signup"> New customer? <a href="./signup"> start here </a></p>
 		</span>
 
-		<?= $userSignedIn ? "<a href='./bridges/logout' class='nav__signout'>Logout</a>" : '' ?>
 
+		<div class="nav__dropdown">
+			<button class="nav__dropbtn primary__btn"><i class="fas fa-caret-down"></i></button>
+			<div class="nav__dropdown__content">
+				<?= $userSignedIn ? "<a href='./account' class='nav__link'>Account</a>" : '' ?>
+				<a href='./upload-product' class='nav__link'>Upload product</a>
+				<?= $userSignedIn ? "<a href='./bridges/logout' class='nav__signout nav__link'>Logout</a>" : '' ?>
+			</div>
+		</div>
 	</div>
 
 </nav>

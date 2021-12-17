@@ -32,16 +32,6 @@ require_once(__DIR__ . '/components/top.php');
 				</span>
 			</article>
 		</a>
-
-		<a href="./products" class='account__link'>
-			<article class="card">
-				<img src="./assets/your_items.png" alt="items" class='card__icon'>
-				<span class='card__title__container'>
-					<h2 class="card__title">My products</h2>
-					<p class='card__description'>See your uploaded products</p>
-				</span>
-			</article>
-		</a>
 	</section>
 
 </main>
