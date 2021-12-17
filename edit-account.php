@@ -4,9 +4,8 @@ $_documentTitle = 'Edit account';
 require_once(__DIR__ . '/components/top.php');
 require_once(__DIR__ . '/private/globals.php');
 
-if (!_is_user_signed_in()) {
-	header('Location: index');
-}
+_handle_loggedin_status();
+
 
 $_icon_className = 'edit-account';
 ?>
