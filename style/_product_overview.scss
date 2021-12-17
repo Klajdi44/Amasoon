@@ -55,7 +55,8 @@
   &--edit-product,
   &--edit-account,
   &--upload__product,
-  &--account {
+  &--account,
+  &--edit-password {
     display: grid;
     place-self: flex-start;
     margin-left: 1em;

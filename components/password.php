@@ -1,4 +1,7 @@
+<?php $_icon_className = 'edit-password'; ?>
 <section class="new__password__container">
+	<?php require_once(__DIR__ . '/back-button.php') ?>
+
 	<?php $_show_logo && require_once(__DIR__ . '/logo.php') ?>
 
 	<p class="new__password__info error"></p>
