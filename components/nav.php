@@ -34,14 +34,14 @@ if ($userSignedIn) {
 					<a href='./bridges/logout' class='nav__signout nav__link'>Logout</a>
 				<?php } else { ?>
 					<a href="./login" class="nav__login__section nav__link"> Log in</a>
-					<a href="./signup" class="signup "> Sign up</p>
+					<a href="./signup" class="signup "> Sign up</a>
 
-					<?php } ?>
+				<?php } ?>
 			</div>
 		</div>
 </nav>
 </div>
-<?php if (!$_SESSION['is_verified'] && !$_SESSION['verified_msg_shown']) { ?>
+<?php if (!$_SESSION['is_verified'] && !$_SESSION['verified_msg_shown'] && $userSignedIn) { ?>
 	<?php $_SESSION['verified_msg_shown'] = true ?>
 	<p class='nav__is__verified'> Account verification link has been sent to <?= $_SESSION['user_email'] ?>! </p>
 <?php } ?>
